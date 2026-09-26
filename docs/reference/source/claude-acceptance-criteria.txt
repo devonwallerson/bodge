@@ -1,0 +1,198 @@
+Acceptance criteria and build plan
+How to use this plan
+Each section below is one milestone from the build plan. It's done when every criterion in its table is marked Done and passes on both a phone and a desktop.
+• One criterion, one check. Every row states an observable result and how to verify it. If you can't check it in under two minutes, split it.
+• IDs are stable. Reference them in commits and PRs (feat: M2-04 re-answer from panel), so the history maps back to this plan.
+• Status flow: Not started → In progress → Done. Mark a criterion Blocked if it's waiting on a decision, and add a comment saying what it's waiting on.
+• Don't start the next milestone early. It can begin when the current one has no rows left in Not started.
+Definition of done, inherited by every criterion:
+[ ] Works at 390 px (a real phone) and at 1440 px (desktop Chrome)
+[ ] Works in all five themes with no hard-coded colors
+[ ] No console errors or TypeScript any in the touched code
+[ ] Keyboard-only use works on desktop, and touch-only use works on mobile
+[ ] Merged to main and deployed to the preview URL
+Milestone 1 — Shell
+Goal: a terminal window that takes input, runs commands and survives the iPhone keyboard. There's no AI and no question flow yet.
+ID
+Criterion
+How to verify
+Status
+M1-01
+Vite + React + TS + Tailwind v4 app deploys to a preview URL on every push
+Push a commit; the preview updates
+Not started
+M1-02
+Title bar shows traffic lights, sprite, bodge, ~/idea-lab and the status pill
+Visual check at 390 and 1440 px
+Not started
+M1-03
+Stream renders user, bot and system messages from one reducer, each visually distinct
+Seed 10 mixed messages; each type reads differently
+Not started
+M1-04
+/help prints the command list instantly, with no typing animation
+Type /help ↵; output appears within one frame
+Not started
+M1-05
+An unknown command shows the confused mood and a "try /help" line
+Type /nope ↵
+Not started
+M1-06
+Typing / opens the command list (cmdk); arrows, ↵ and Esc work, and tap works on mobile
+Keyboard pass on desktop, tap pass on a phone
+Not started
+M1-07
+The stream sticks to the bottom as messages arrive, unless you've scrolled up; then ↓ new appears
+Scroll up, trigger /help, check the marker
+Not started
+M1-08
+With the keyboard open on iOS Safari and Android Chrome, the prompt sits directly above it, the title bar stays visible and the page doesn't jump
+Real iPhone + real Android phone; focus the prompt, type, dismiss
+Not started
+M1-08 is the riskiest row in the whole plan. If it isn't Done by the end of the week, stop and fix it before starting M2.
+Milestone 2 — Question flow
+Goal: /generateIdea walks all five questions on both screen sizes, and the answers fill what bodge knows live. It still makes no API call.
+ID
+Criterion
+How to verify
+Status
+M2-01
+Questions live in questions.ts; adding a sixth needs no component changes
+Add a dummy question; it appears in the flow and the panel
+Not started
+M2-02
+Options render as inline text buttons with a ▸ cursor and underline on the selected one
+Visual check against the mockup
+Not started
+M2-03
+Desktop: 1–5 pick an option, ← → move the cursor and ↵ locks in
+Keyboard-only run through all 5 questions
+Not started
+M2-04
+Mobile: each option row is at least 44 px tall and tapping posts ❯ <answer> to the stream; multi-pick shows ↵ done
+Touch-only run on a phone
+Not started
+M2-05
+Free text is accepted wherever allowFreeText is true, up to 200 characters
+Type a custom field; it lands in the panel
+Not started
+M2-06
+The desktop side panel updates each row the moment it's answered, with a caret on the newest
+Watch the panel during a run
+Not started
+M2-07
+Clicking a panel value re-asks only that question, and the new answer replaces the old one
+Re-answer spice; the other answers stay the same
+Not started
+M2-08
+Mobile progress strip shows ■□ progress and opens the vaul sheet on tap or swipe up
+Tap and swipe on a phone
+Not started
+M2-09
+The sheet shows answered rows, · · · for unanswered ones and the commands; the Android back button closes it without leaving the site
+Open the sheet, press back
+Not started
+Milestone 3 — Idea generation
+Goal: finishing the questions returns three real, validated ideas. They reveal as outlined cards you can page through, accept, refine or skip.
+ID
+Criterion
+How to verify
+Status
+M3-01
+POST /api/ideas returns { ideas[3], quip } that passes the shared zod schema
+20 runs with varied answers; 20/20 parse
+Not started
+M3-02
+On invalid JSON the server retries once, then returns a typed error
+Force a bad response in a test; check the retry and error
+Not started
+M3-03
+The API key never reaches the client, and requests are rate-limited per IP
+Search the built JS for the key; send 11 requests in a minute and get a 429
+Not started
+M3-04
+Every idea is revealed only after it passes validation, typed out field by field at about 60 characters per second
+Throttle to slow 3G; the reveal never shows broken JSON
+Not started
+M3-05
+The idea card uses a 1 px border with the header on the top edge, --bg fill and no button fills
+Visual check against the mockup in all 5 themes
+Not started
+M3-06
+Desktop: a / r / n work only while the prompt is empty; [ ] page through the pool
+Type "a real app" in the prompt; nothing fires
+Not started
+M3-07
+Mobile: the three ideas swipe with native scroll-snap, ‹ 1 / 3 › updates, and the action row acts on the visible card
+Swipe to card 2, tap accept; card 2 is accepted
+Not started
+M3-08
+Refine fills in refine: , sends the current idea plus the instruction, and adds a new card below the old one
+Refine "make it multiplayer"; the new card reflects it
+Not started
+M3-09
+The spice answer changes the output: unhinged ideas read noticeably weirder than sensible ones on the same answers
+Run both on the same answers and compare side by side
+Not started
+M3-10
+A network or model failure shows confused bodge plus a retry hint, never a blank card
+Kill the server mid-request
+Not started
+Milestone 4 — Polish and launch
+Goal: bodge feels alive, every theme holds up, the app is accessible and fast, and it's live on a real URL.
+ID
+Criterion
+How to verify
+Status
+M4-01
+All six moods render and are triggered only by their events (keystroke, request sent, JSON valid, reveal done, error)
+Walk the full flow and watch the sprite change at each step
+Not started
+M4-02
+The status pill mirrors the mood and is aria-live="polite"
+Screen reader announces "thinking" and then "typing"
+Not started
+M4-03
+Under reduced motion, the hop and tilt stop and the faces still change
+Turn on the OS reduced-motion setting and rerun the flow
+Not started
+M4-04
+Five themes switch from the title bar dots on desktop and from tap or long-press on mobile, and the choice persists
+Pick Magenta, reload; there's no flash of the default theme
+Not started
+M4-05
+theme-color meta follows --surface
+The phone browser bar matches each theme
+Not started
+M4-06
+The stream is role="log", the full idea is announced once after the reveal, and there are no clickable divs
+VoiceOver pass plus a quick axe scan with zero violations
+Not started
+M4-07
+Text meets 4.5:1 contrast in every theme (Matcha accent used only on fills or large text)
+Contrast check on muted and accent for each theme
+Not started
+M4-08
+Lighthouse mobile Performance and Accessibility both score 90+; JS is 120 KB gzipped or less
+Lighthouse run on the production URL
+Not started
+M4-09
+Production deploy with a provider spend cap set
+Open the live URL on a phone; the provider dashboard shows the cap
+Not started
+MVP gate
+The MVP ships when this script passes end to end on three devices in one sitting: a real iPhone (Safari), a real Android phone (Chrome) and a desktop (Chrome at 1440 px).
+1. Open the production URL fresh, with cleared storage. The intro lines show and bodge is idle.
+2. Type /help. The command list appears instantly.
+3. Run /generateIdea and answer all five questions. Use touch on the phones and keys only on desktop, with at least one free-text answer.
+4. Watch what bodge knows, in the side panel or the sheet, fill row by row.
+5. Re-answer spice from the panel or sheet. Only that question is re-asked.
+6. Ideas arrive. bodge goes thinking → typing → eureka, and the card reveals with no broken text.
+7. Page to idea 2 by swiping or pressing ]. Accept it.
+8. Refine the idea with "make it multiplayer". A new card appears below and reflects the change.
+9. Switch to Matcha, then reload. The theme persists with no flash.
+10. With the keyboard open on each phone, the prompt stays directly above it the whole time.
+[ ] iPhone — Safari
+[ ] Android — Chrome
+[ ] Desktop — Chrome 1440 px
+Any failed step becomes a new criterion in the milestone it belongs to, and the gate is run again.

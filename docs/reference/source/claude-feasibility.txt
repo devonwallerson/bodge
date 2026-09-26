@@ -1,0 +1,231 @@
+bodge — MVP technical feasibility
+Sep 26, 2026 · @devon
+Verdict and MVP scope
+The design can be built. No part of it needs new tech: it is one React page, one Node endpoint and one LLM call per idea. A solo frontend engineer can ship the MVP in roughly 3–4 weeks of evenings. The two parts that need the most care are mobile keyboard handling and getting reliable structured output from the model.
+In the MVP
+• Desktop terminal page: a title bar with the bodge sprite, ~/idea-lab, a status pill and theme dots. The stream holds the intro, commands, question prompts with inline options, and the outlined idea card with [a] [r] [n] actions. The side panel shows what bodge knows and the commands.
+• Mobile terminal: the same stream, plus a progress strip under the header, tappable option rows and a slash-command list above the prompt.
+• Mobile idea card: the outlined card, ‹ 1 / 3 › swipe between the ideas in the pool, and an action row pinned above the prompt.
+• Mobile what bodge knows sheet: slides up from the bottom, shows the answers so far plus the commands, and lets you tap a value to re-answer it.
+• Commands: /help, /generateIdea and /theme, plus free-text refine (for example "make it multiplayer").
+• Themes: five of them (Terminal, Magenta, Indigo, Blue, Matcha), remembered per browser.
+Deferred: saved ideas, /savedIdeas, accounts, sharing, and export.
+Architecture
+The browser does almost everything; the server exists only to keep the API key secret and shape the prompt.
+Everything except idea generation runs locally in the browser: /help, /theme, the question flow and the what bodge knows panel make no network call. A session sends exactly one request per /generateIdea or refine.
+Hosting: you don't need Vercel. There are two good options:
+• Simplest: one Next.js app on Vercel's free tier. The API route is a Node function and there's no CORS to set up.
+• Split: the static frontend on Cloudflare Pages or Netlify, and the Hono server on Render or Fly. This matches the Node-backend plan more literally.
+Pick the split setup if you want the backend to be its own resume line. Pick Next.js if you want to ship this weekend.
+Frontend stack and theming
+Use Tailwind v4 with CSS variables, a few small libraries, and no component kit. The design is mostly typography and one-pixel borders, so a kit would mostly be something to fight against.
+Need
+Choice
+Why
+Build
+Vite + React + TypeScript
+Fast dev server, no SSR needed for a single interactive page
+Styling
+Tailwind v4
+Utility classes read well against the mockups; @theme maps straight onto theme variables
+Slash-command list
+cmdk
+Handles filtering, arrow keys and ARIA for the completion list
+Mobile sheet
+vaul
+Drag-to-dismiss bottom sheet with snap points; built on Radix Dialog, so focus is trapped
+Card swipe
+CSS scroll-snap
+Native momentum on iOS and Android, zero JS
+Character motion
+CSS keyframes (Motion only if needed)
+Hop, flash and tilt are loops; @keyframes covers them
+Schema
+zod
+One schema shared by the server check and the client types
+Fonts
+IBM Plex Mono + Bricolage Grotesque
+Self-host with @fontsource; subset Bricolage to Latin since it only renders titles
+Themes are five sets of CSS variables. Each theme defines 10 tokens: bg, surface, border, text, muted, main, accent, highlight, onMain and mark. Setting data-theme="magenta" on <html> swaps all of them at once, with no re-render.
+:root[data-theme="magenta"] {
+  --bg: #170C17; --surface: #1F111F; --border: #40263F;
+  --text: #F6E9F3; --muted: #B394AD;
+  --main: #FF5FC8; --accent: #FFB36B; --highlight: #7CF3F0;
+}
+Tailwind v4's @theme block points bg-bg, text-main and so on at those variables. Store the chosen theme in localStorage and apply it with an inline script in index.html before React loads, so the page never flashes the default theme first.
+Color roles, once:
+• main is for the things you act on: the prompt glyph, commands, the selected option, and [a].
+• accent is for bodge's own voice: the spark, the idea number, the spice bar and the status pill.
+• highlight is for the idea card's field labels only.
+Terminal stream and message model
+The stream is an append-only array of typed messages rendered by one switch. The whole app state fits in a single useReducer, so there's no need for a state library.
+type Message =
+  | { id: string; role: 'user'; kind: 'text'; text: string }
+  | { id: string; role: 'bot'; kind: 'text'; text: string; mood?: Mood }
+  | { id: string; role: 'bot'; kind: 'question'; qid: QuestionId; answered?: string }
+  | { id: string; role: 'bot'; kind: 'progress'; done: number; total: number }
+  | { id: string; role: 'bot'; kind: 'ideas'; ideas: Idea[]; active: number }
+  | { id: string; role: 'system'; kind: 'help' | 'error'; text?: string };
+
+type Session = {
+  answers: Partial<Record<QuestionId, string>>; // feeds "what bodge knows"
+  step: 'idle' | 'asking' | 'generating' | 'showing';
+  theme: ThemeKey;
+};
+Input routing. Every submit goes through one parser, in this order:
+1. Text that starts with / is a command, matched against a registry. An unknown command gets the confused mood plus a "try /help" line.
+2. While step = 'asking', a digit (1–5) or an option label answers the current question. Anything else is saved as a free-text answer.
+3. While step = 'showing', the single keys a, r and n trigger the actions. Anything else counts as a refine instruction and goes to the API with the current idea attached.
+4. Otherwise bodge replies with a canned nudge toward /generateIdea.
+Questions are data, not code. Keep a questions.ts array where each entry has { id, prompt, options, multi, allowFreeText, panelLabel }. The flow walks the array, and the side panel and mobile sheet render from session.answers and panelLabel. That is why they fill in as you answer. Re-answering from the panel sets that one answer and re-asks only that question.
+Deterministic replies are instant. /help, /theme and question prompts appear immediately, with no typing animation. Only model output gets the typewriter, so the difference itself tells you when bodge is "thinking".
+Character state machine
+bodge has six moods, and each one is triggered by something that actually happened in the app. That is what makes it feel like it's reacting to you rather than looping an animation.
+If input stops for a moment, listening drops back to idle, and /help or /theme go straight from listening to idle. The mood lives in the reducer as session.mood. The title bar sprite, its status pill and the inline avatar next to the latest bot line all read it.
+Build it as one SVG with swappable parts. The head and antenna are fixed. The eyes, mouth and spark come from a mood → parts map, and a CSS class sets the motion: hop, flash, tilt or lean. Colors come from --main and --accent, so every theme recolors the sprite for free. A mood change is a class swap, which costs nothing.
+Reduced motion. Under prefers-reduced-motion: reduce, turn off the hop and the tilt. Keep the static face changes and slow the spark flash to a gentle fade. The status pill text (thinking, typing) carries the meaning either way, and it should be aria-live="polite" so screen readers hear it.
+Idea generation backend
+One endpoint returns three ideas as validated JSON. Every idea-card field maps one-to-one to a key, so the card never has to parse prose.
+const Idea = z.object({
+  title: z.string().max(40),
+  oneLiner: z.string().max(120),
+  tags: z.array(z.string()).max(3),      // "games × climate"
+  spice: z.number().int().min(1).max(4),
+  problem: z.string().max(160),
+  loop: z.string().max(140),
+  stack: z.array(z.string()).min(2).max(5),
+  scope: z.string(),                       // "48h · 2–3 people"
+  stretch: z.string().max(120),
+});
+const IdeaResponse = z.object({ ideas: z.array(Idea).length(3), quip: z.string().max(80) });
+The request: POST /api/ideas with { answers, refine?: { idea, instruction } }. The server builds the prompt and calls the model with the schema as a JSON-schema response format. It then checks the result with IdeaResponse.safeParse. If the check fails, it retries once, telling the model what was wrong. If that fails too, it returns an error, and bodge goes to the confused mood.
+The prompt, in three parts:
+1. A fixed persona: lowercase, dry and a little cheeky, never mean.
+2. The rules: stay within the time and skills given, name only real tools, and keep each field within its length cap.
+3. The answers as labeled lines.
+The spice answer does two jobs. It sets the persona's permission to get weird, and it sets the temperature (roughly 0.6 for sensible up to 1.0 for unhinged). The ID number comes from the client, not the model.
+Buffered reveal. The UI waits for the whole validated response and then types it out on the client at about 60 characters per second, field by field. Streaming raw tokens would show broken JSON and couldn't be checked first. The wait is covered by the thinking mood plus a rotating status line ("reading your vibe…", "asking the grid…").
+Model choice. Use a small, fast hosted model that supports JSON-schema output, such as a Claude Haiku-class or GPT mini-class model. The alternative is an open-weight Llama or Qwen model served by Groq or Together. The open model is cheaper and faster, but the humor lands flatter and the JSON needs the retry more often. Keep the provider behind a single generateIdeas() function so switching is a one-file change.
+Abuse and cost. Rate-limit by IP in memory, around 10 requests per minute. Cap free-text answers at 200 characters, and keep the key on the server only. One call is a few hundred output tokens, so cost per idea is a fraction of a cent on a small model.
+Desktop experience
+From 1024 px up, the page is a centered window with the stream on the left and the fixed side panel on the right. The keyboard does everything, and the mouse is optional.
+Layout. The page is a CSS grid: grid-template-rows: 52px 1fr auto for the title bar, body and prompt. The body is grid-template-columns: 1fr 272px. The window fills min(1180px, 100vw - 96px) and 100dvh - 96px. Only the stream scrolls. The title bar, prompt and side panel stay put.
+Scroll behavior. The stream sticks to the bottom as new lines arrive, unless you've scrolled up. In that case a quiet ↓ new marker appears above the prompt. Use an IntersectionObserver on a sentinel element at the bottom of the stream; don't compute scroll positions by hand.
+Keyboard model:
+Key
+Where
+Does
+/
+anywhere
+focuses the prompt and opens the command list
+1–5
+question showing
+picks that option
+← →
+question showing
+moves the ▸ cursor
+↵
+anywhere
+submits, or locks in the highlighted option
+a r n
+idea card showing, prompt empty
+accept, refine, next
+↑
+prompt empty
+loads the last answer for editing
+Esc
+command list open
+closes it
+The single-letter keys only fire while the prompt is empty. That way typing "a real-time app" never triggers accept by accident.
+The side panel is a live view of session.answers, not a copy. When a new answer lands, that row shows a blinking caret for about 1.5 s, which draws the eye there without any extra motion. Clicking a value sends a scripted message (❯ re-answer: spice) and re-asks that one question in the stream, so the panel never becomes a separate form.
+The idea card is a <article> with a 1 px border. Its header labels are absolutely positioned on the top border, with a background equal to --bg, which gives it the TUI box look. The fields are a two-column grid (96px 1fr), and ‹ 1 / 3 › pages through the pool with n/[ ]. Refine adds a new card below rather than changing the old one, so you can scroll back and compare.
+From 768 to 1023 px, the side panel collapses into the progress strip and sheet from the mobile design. Below 768 px, you get the full mobile layout.
+Mobile experience
+Mobile is the same app and the same reducer, rearranged. The hard part isn't the layout. It's keeping the prompt and action row glued above the on-screen keyboard on both iOS Safari and Android Chrome.
+Screen structure (under 768 px): a flex column that fills the viewport.
+Zone
+Height
+Contents
+Title bar
+52 px
+traffic lights, sprite + bodge + mood word, theme dot (44 px tap target)
+Progress strip
+40 px
+■■□□□ 2 of 5 · what bodge knows ›, opens the sheet
+Stream
+fills the rest, scrolls
+same messages as desktop, 16 px side padding
+Command list
+0 or 3 × 44 px
+only while the prompt starts with /
+Action row
+0 or 48 px
+[a] accept  [r] refine  [n] next, only while an idea card is showing
+Prompt
+56 px + safe area
+❯ input, ↵ send button (44 × 44)
+Viewport and keyboard, the part to get right:
+• Size the app shell with height: 100dvh. Plain 100vh on iOS includes the area behind the browser bars, which pushes the prompt off-screen.
+• Add interactive-widget=resizes-content to the viewport meta tag. With it, Android Chrome shrinks the page when the keyboard opens instead of drawing the keyboard over it.
+• On iOS, listen to window.visualViewport resize events and set a --kb CSS variable to the gap between the layout viewport and the visual one. Use it as padding-bottom on the shell. Without this, iOS Safari scrolls the whole page up and the title bar disappears.
+• Pad the prompt's bottom with env(safe-area-inset-bottom) so it clears the home indicator.
+• Set the input font to 16 px. Anything smaller makes iOS zoom in on focus.
+• Set enterkeyhint="send", autocapitalize="none" and autocorrect="off" on the input. Commands and single letters shouldn't get "corrected" by the keyboard.
+Touch model:
+• Every option row, command row and action button is at least 44 px tall. They look like plain text, but the tap area is the full row width.
+• Question options are <button aria-pressed> rows. The selected one shows ▸ plus an underline in --main. On multi-pick questions, tapping toggles. A small ↵ done appears once at least one option is picked.
+• Tapping an option also posts the answer as a user line (❯ games), so the stream still reads like a terminal transcript.
+• The command list replaces the keyboard-shortcut hints from desktop. Typing / shows it, and tapping a row runs the command directly with no extra send.
+• Single-letter shortcuts are turned off on touch devices. The action row covers them.
+Mobile idea card:
+• It's the same outlined <article> as desktop, but the fields stack (label above value) instead of sitting in two columns. The header shows only idea 017 · 48h · 2–3 on the left and the spice bar on the right, to save space.
+• The three pooled ideas sit in a horizontal scroll-snap-type: x mandatory row, one card per snap point, so swiping is native momentum. A small IntersectionObserver updates the ‹ 1 / 3 › counter and which card the action row applies to.
+• [r] refine focuses the prompt and fills in refine: , so you only type the change. The keyboard opens and the action row slides up with the prompt.
+• Long ideas: the card grows and the stream scrolls. Nothing inside the card scrolls on its own, because nested scroll areas fight with swiping.
+The what bodge knows sheet:
+• It's a vaul drawer that opens from the progress strip, from a swipe up on the strip, or from a /knows command. Its snap points are 70% of the height and full height.
+• It shares the page background, with a top border, a 16 px top radius and a grab handle. The stream behind it dims to 30% opacity.
+• Answered rows show their values, the newest with a blinking caret. Unanswered rows show · · ·. Tapping a value closes the sheet and re-asks that question in the stream.
+• It also lists the commands. That covers desktop's command panel, so mobile loses no features.
+• Because it's built on Radix Dialog, focus is trapped while it's open and Esc/back closes it. Hook up the Android back button through a popstate entry so back closes the sheet instead of leaving the site.
+Theme on mobile: tapping the dot in the title bar cycles to the next theme. Long-pressing it opens a five-swatch popover. Update <meta name="theme-color"> to --surface so the browser bar matches the theme.
+Performance and accessibility
+The app is small enough that performance comes down to three habits. Don't cache or virtualize the stream; a session is dozens of messages, not thousands.
+Performance:
+• Put content-visibility: auto with contain-intrinsic-size on each stream message. The browser skips painting off-screen messages for free, which gets the benefit you wanted from caching off-screen cards.
+• The typewriter updates a single text ref inside requestAnimationFrame, not React state on every character. That keeps the reveal smooth on mid-range Android phones.
+• Aim for a JS bundle under about 120 KB gzipped: React, cmdk, vaul and zod, with no chart or icon libraries. Preload the two font files and use font-display: swap.
+Accessibility:
+• The stream is a role="log" region with aria-live="polite". The typewriter writes into a hidden element, and screen readers get the full idea text once, when the reveal finishes, not letter by letter.
+• Options are real <button aria-pressed> elements, the prompt is a labeled <input>, and the theme dots have aria-labels. There are no clickable divs anywhere.
+• Focus stays in the prompt after every action on desktop. On mobile, the keyboard is dismissed after an option tap so the next question is visible.
+• Contrast: muted passes 4.5:1 on bg in all five themes. Matcha's accent is only used for fills and large text, because it falls short of 4.5:1 as small text on white.
+Risks and mitigations
+The highest risk is iOS keyboard behavior. Test it on a real iPhone in week one, not at the end.
+Risk
+Likelihood
+Mitigation
+iOS Safari hides the prompt or shifts the page when the keyboard opens
+High
+100dvh + the visualViewport → --kb variable; test on a real device from week 1
+Model returns malformed or overlong JSON
+Medium
+JSON-schema response format, zod check, one corrective retry, length caps in the schema
+Ideas feel samey across runs
+Medium
+Ask for 3 ideas that differ from each other in one call, raise temperature with spice, add a short random "constraint card" to each prompt
+Ideas are unfunny or off-tone
+Medium
+A handful of example ideas in the system prompt; a quick side-by-side test of two models on the same answers
+Single-letter shortcuts fire while typing
+Low
+Only active when the prompt is empty; off on touch
+Swipe fights vertical scroll on mobile
+Low
+Native scroll-snap on the x-axis only; no nested vertical scroll inside cards
+API key abuse or cost spike
+Low
+Server-only key, per-IP rate limit, a monthly spend cap in the provider dashboard
+Build plan
+The MVP takes about four evening-and-weekend weeks. Build mobile and desktop together from day one rather than one after the other.
+Each week ends with something you can use: by week 2 you can finish the question flow without the model, and by week 3 you get real ideas. Build and test every screen at 390 px and at 1440 px in the same sitting.

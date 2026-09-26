@@ -1,0 +1,15 @@
+# Dependencies and build outputs
+node_modules/
+.next/
+out/
+dist/
+coverage/
+
+# Local credentials and configuration
+.env
+.env.*
+!.env.example
+
+# Local/editor files
+.DS_Store
+*.log
