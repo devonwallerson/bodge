@@ -5,13 +5,13 @@ Use this file to resume work in a new session. Read [FEASIBILITY.md](FEASIBILITY
 ## Current state
 
 - Planning documents and visual references are saved in this repository.
-- Git is initialized on `main`; no remote, application code, or deployment exists yet.
+- Git is initialized on `main`; the public remote is `https://github.com/devonwallerson/bodge.git`, and `main` tracks `origin/main`. No application code or deployment exists yet.
 - Owner confirmed local saved ideas, “useful with a funny twist,” and a redesign of the interview questions.
 - Start the shell with fake data while the interview wording is reviewed. Ask for approval of exact questions before implementing M2.
 
 ## Build sequence
 
-1. Inspect the repository and any changes made since this runbook. Update the M0 statuses. Git is initialized on `main`. Do not create a remote or push until the owner has supplied the account/visibility choice and authenticated.
+1. Inspect the repository and any changes made since this runbook. Update the M0 statuses. Git and the public remote are set up; keep `main` in sync with `origin/main` as work progresses.
 2. Scaffold one Next.js + React + TypeScript app with Tailwind and a minimal test/build setup. Build a static responsive version of the attached desktop and mobile terminal using fake transcript and idea data. Validate mobile keyboard behavior on physical devices during this phase; record what was tested.
 3. Implement reducer, typed message renderers, deterministic command parser, theme tokens, Bodge SVG/moods, responsive side panel/sheet, and scroll behavior. Check M1 criteria and compare screenshots to references.
 4. Record owner-approved question wording/options in `FEASIBILITY.md`. Implement the five data-driven turns, answer edit flow, and normalized API input; check M2.
@@ -25,8 +25,7 @@ Each stage should leave a usable app and update the acceptance statuses. A faile
 
 | Item | Why / when | Owner action |
 | --- | --- | --- |
-| GitHub account and repository visibility | Needed to create remote and push | Choose personal account or organization; public or private repo |
-| GitHub authentication | Needed for first remote push | Authenticate with GitHub CLI, Git credential manager, or GitHub Desktop on this machine |
+| GitHub repository | Complete | Public `devonwallerson/bodge` repository is connected and the first commit has been pushed |
 | Model provider project and API key | Needed at M3 | Create project/key; enter key directly in local `.env.local` and host secret settings |
 | Provider budget | Needed before public launch | Set spend alert and hard limit in provider dashboard |
 | Hosting account | Needed for preview/production | Connect GitHub repo to a Next.js capable host (Vercel is the simplest candidate) |

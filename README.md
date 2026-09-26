@@ -2,6 +2,8 @@
 
 A terminal-style project idea generator for builders and hackathon teams. Planning is underway; application code has not been started.
 
+GitHub repository: [devonwallerson/bodge](https://github.com/devonwallerson/bodge) (public).
+
 - [Living feasibility and product specification](docs/FEASIBILITY.md)
 - [Acceptance criteria](docs/ACCEPTANCE_CRITERIA.md)
 - [Implementation runbook](docs/IMPLEMENTATION_RUNBOOK.md)

@@ -10,8 +10,9 @@ Updated 2026-09-26. This is the executable checklist derived from the [living fe
 | --- | --- | --- |
 | M0-01 | Owner reviews the five proposed question slots, choices, and sidebar labels; approved wording is recorded in `FEASIBILITY.md`. | Blocked: owner review |
 | M0-02 | Git repo has `main`, a safe `.gitignore`, and a README linking these plans; no secrets are tracked. | Done |
-| M0-03 | Repository owner/visibility and deployment provider are recorded; remote can be pushed after owner authenticates. | Blocked: owner accounts/choice |
+| M0-03 | Public `devonwallerson/bodge` remote exists and local `main` tracks `origin/main`. | Done |
 | M0-04 | Model provider is chosen after a structured-output smoke test; key stays outside Git and server build output. | Blocked: provider account/key |
+| M0-05 | Deployment provider is selected and connected to GitHub when preview deployment is needed. | Blocked: hosting choice |
 
 ## M1 — Responsive shell and conversation
 
@@ -67,7 +68,7 @@ M1-06 is the first technical spike. Record the tested OS/browser versions and an
 | M5-02 | Terminal, Magenta, Indigo, Blue, Matcha persist without first-paint flash; text/focus contrast passes checks. | Not started |
 | M5-03 | No clickable divs; buttons/fields have labels; transcript and sheet pass keyboard and screen-reader checks. | Not started |
 | M5-04 | Production build loads and responds smoothly on a midrange phone; measure and fix actual bottlenecks. | Not started |
-| M5-05 | GitHub-connected deployment serves frontend and Node API, with secret set in host settings and provider spend alert/hard limit. | Blocked: M0-03/M0-04 |
+| M5-05 | GitHub-connected deployment serves frontend and Node API, with secret set in host settings and provider spend alert/hard limit. | Blocked: M0-04/M0-05 |
 | M5-06 | Complete fresh-session gate passes on iPhone Safari, Android Chrome, and desktop Chrome. | Not started |
 
 ## Fresh-session gate
