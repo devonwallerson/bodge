@@ -6,7 +6,7 @@ Updated 2026-09-26. This is the canonical specification for implementation. The 
 
 Bodge is a personality driven project idea generator for hackathon participants, builders, and hobbyists. A five-question conversation produces three **useful ideas with a funny twist**, scoped to the user's time, team, and skills. Users can accept, refine, and move to the next idea. Accepted ideas survive a reload **on the same device**, without an account.
 
-The owner confirmed that the five questions shown in the renderings should be redesigned before implementation. The original Claude plan deferred saved ideas; that is superseded by the owner's local-save decision. Our first draft proposed two ideas; the renderings and attached plan show three, so the MVP will return three.
+The owner confirmed that the five questions shown in the renderings should be redesigned before implementation. Bodge will draw five questions from a [50-question bank](QUESTION_BANK.md), one per coverage slot, so runs vary while still providing enough information for useful ideas. The original Claude plan deferred saved ideas; that is superseded by the owner's local-save decision. Our first draft proposed two ideas; the renderings and attached plan show three, so the MVP will return three.
 
 ## MVP scope
 
@@ -32,7 +32,9 @@ Theme tokens: background, surface, border, text, muted text, primary action, cha
 
 `/generateIdea`, `/help`, `/theme`, `/savedIdeas`, and `/knows` are deterministic. `/` focuses the prompt and opens completion. Desktop keyboard shortcuts work only in the relevant state and only when the prompt is empty: number keys for options; `a`, `r`, `n` for ideas; Enter to confirm. Mobile always has visible controls and does not depend on shortcuts. Unknown commands return a helpful hint. New transcript messages auto-scroll only while the user is already at the bottom; otherwise show a jump-to-new control. Do not virtualize the short transcript.
 
-## Interview proposal — owner review needed before milestone 2
+## Interview structure — owner review needed before milestone 2
+
+The [question bank](QUESTION_BANK.md) contains 50 proposed questions, ten in each of five groups. For each run, select one goal, one worlds/domain, one time-and-team scope, one toolkit, and one spice question. The five sample prompts below show the direction; they are no longer a fixed script.
 
 | Slot | Proposed prompt | Input | Stored answer |
 | --- | --- | --- | --- |
@@ -42,11 +44,11 @@ Theme tokens: background, surface, border, text, muted text, primary action, cha
 | 4 | “What can you build with, and what should I avoid?” | Skill chips plus optional text; no preference available | `skills[]`, `avoid` |
 | 5 | “How weird may this get?” | Sensible / quirky / spicy / unhinged; optional constraint | `spice`, `extraConstraint` |
 
-The five turns produce six sidebar labels (`vibe`, `field`, `time`, `team`, `skills`, `spice`) because turn 3 contains two quick controls. Every answer can be edited from the panel/sheet. Editing affects future generations and does not rewrite already generated ideas. “Surprise me” resolves to a valid explicit value. Confirm exact language, domain set, and what “unhinged” means before the question flow is built.
+The five turns produce six sidebar labels (`vibe`, `field`, `time`, `team`, `skills`, `spice`) because the scope turn contains two quick controls. Every answer can be edited from the panel/sheet. Editing affects future generations and does not rewrite already generated ideas. “Surprise me” resolves to a valid explicit value. Confirm the bank's wording, domain set, and what “unhinged” means before the question flow is declared complete.
 
 ## State, schema, and persistence
 
-Use a single client reducer for step, answers, transcript messages, active idea, and Bodge mood. Store questions as data in `questions.ts`. Render transcript entries by type (`user`, `bot`, `question`, `progress`, `ideas`, `system`). The side panel and sheet read the same answers. Send normalized answers to the API, not the rendered transcript. Bodge's name, SVG, and moods are frontend configuration, so they need no backend table.
+Use a single client reducer for step, answers, transcript messages, active idea, and Bodge mood. Store the 50-question bank as typed data and select one per slot using the rules in `QUESTION_BANK.md`. Render transcript entries by type (`user`, `bot`, `question`, `progress`, `ideas`, `system`). The side panel and sheet read the same normalized answers. Send those answers to the API, not the rendered transcript. Bodge's name, SVG, and moods are frontend configuration, so they need no backend table.
 
 ```ts
 type IdeaContent = {
@@ -95,4 +97,4 @@ The owner will eventually need a GitHub account/repository, a model-provider pro
 
 ## Open decisions
 
-Confirmed: useful with a funny twist; local persistence; the supplied renderings guide UI; redesign the questions; public GitHub repository under `devonwallerson`. Pending: exact question wording/choices, final card copy, hosting provider, model provider and budget, and optional domain. These do not block the shell prototype with fake ideas. Keep this plan and the [acceptance criteria](ACCEPTANCE_CRITERIA.md) current as the implementation reveals constraints.
+Confirmed: useful with a funny twist; local persistence; the supplied renderings guide UI; five questions drawn from a 50-question bank; public GitHub repository under `devonwallerson`. Pending: review of the drafted bank's wording/choices, final card copy, hosting provider, model provider and budget, and optional domain. These do not block the shell prototype with fake ideas. Keep this plan and the [acceptance criteria](ACCEPTANCE_CRITERIA.md) current as the implementation reveals constraints.

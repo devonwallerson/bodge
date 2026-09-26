@@ -8,7 +8,7 @@ Updated 2026-09-26. This is the executable checklist derived from the [living fe
 
 | ID | Observable result / check | Status |
 | --- | --- | --- |
-| M0-01 | Owner reviews the five proposed question slots, choices, and sidebar labels; approved wording is recorded in `FEASIBILITY.md`. | Blocked: owner review |
+| M0-01 | Owner reviews the 50-question bank, five coverage slots, choices, and sidebar labels; approved wording is recorded in `QUESTION_BANK.md`. | Blocked: owner review |
 | M0-02 | Git repo has `main`, a safe `.gitignore`, and a README linking these plans; no secrets are tracked. | Done |
 | M0-03 | Public `devonwallerson/bodge` remote exists and local `main` tracks `origin/main`. | Done |
 | M0-04 | Model provider is chosen after a structured-output smoke test; key stays outside Git and server build output. | Blocked: provider account/key |
@@ -31,8 +31,9 @@ M1-06 is the first technical spike. Record the tested OS/browser versions and an
 
 | ID | Observable result / check | Status |
 | --- | --- | --- |
-| M2-01 | Approved questions are data records; adding a sixth test question requires no new screen component. | Blocked: M0-01 |
-| M2-02 | `/generateIdea` asks five turns; option, free-text, skip/surprise, and two-control time/team turn behave as approved. | Blocked: M0-01 |
+| M2-01 | Bank contains 50 unique question IDs, ten per slot; new questions require no new screen component. | Blocked: M0-01 |
+| M2-02 | `/generateIdea` selects one from each slot, asks exactly five turns, and normalizes answers into the same schema; refresh does not reshuffle an active run. | Blocked: M0-01 |
+| M2-07 | New runs avoid variants used in the last two sessions when alternatives exist; several runs feel different in manual review. | Not started |
 | M2-03 | Desktop number keys, arrow selection, Enter, and mobile 44 px tap rows work; free text never triggers idea shortcuts. | Not started |
 | M2-04 | Progress and “what Bodge knows” update from the same answer state on desktop and mobile. | Not started |
 | M2-05 | Editing one answer from panel/sheet re-asks only that item and preserves the other answers. | Not started |
