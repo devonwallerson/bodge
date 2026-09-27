@@ -67,7 +67,7 @@ const initial: State = {
     { id: 2, type: "user", text: "/generateIdea" },
     { id: 3, type: "bot", text: "ok. five questions. no wrong answers, only boring ones." },
     { id: 4, type: "progress", value: 4 },
-    { id: 5, type: "question-preview", text: "how weird are we allowed to get?", options: ["sensible", "quirky", "spicy", "unhinged"] },
+    { id: 5, type: "question-preview", text: "what harmless surprise would make the demo memorable?", options: ["sensible", "quirky", "spicy", "unhinged"] },
     { id: 6, type: "user", text: "3" },
     { id: 7, type: "bot", text: "cooked three. this one's my favorite." },
     { id: 8, type: "ideas" },
@@ -116,15 +116,15 @@ function restoredEntries(draft: Draft): Entry[] {
     { id: id++, type: "bot", text: "ok. five questions. no wrong answers, only boring ones." },
   ];
   for (let index = 0; index < 5; index++) {
-    const slot = slots[index];
+    const slot = draft.order[index];
     const answer = draft.answers[slot];
     if (!answer) break;
-    entries.push({ id: id++, type: "question", questionId: draft.questionIds[index], slot });
+    entries.push({ id: id++, type: "question", questionId: draft.questionIds[slots.indexOf(slot)], slot });
     entries.push({ id: id++, type: "user", text: answerSummary(answer) });
     entries.push({ id: id++, type: "progress", value: index + 1 });
   }
   if (draft.currentIndex === 5) {
-    entries.push({ id: id++, type: "bot", text: "interview complete. these three cards are visual samples; idea generation based on your answers is next." });
+    entries.push({ id: id++, type: "bot", text: "interview complete. these three cards are visual samples; idea generation based on your answers is next. type /generateIdea for a fresh set of questions." });
     entries.push({ id: id++, type: "ideas" });
   } else entries.push({ id: id++, type: "bot", text: "back where we left off. let's keep going." });
   return entries;
@@ -210,7 +210,7 @@ export function Terminal() {
       { id: nextId.current++, type: "question", questionId: draft.questionIds[questionIndex], slot: answer.slot },
       { id: nextId.current++, type: "user", text: answerSummary(answer) },
       { id: nextId.current++, type: "progress", value: completedCount(updated) },
-      { id: nextId.current++, type: "bot", text: editing ? "updated. the ideas already shown stay as they were." : ready ? "interview complete. these three cards are visual samples; idea generation based on your answers is next." : updated.currentIndex === 5 ? "one answer needs another look. tap what i know to fix it." : "logged. next question." },
+      { id: nextId.current++, type: "bot", text: editing ? "updated. the ideas already shown stay as they were." : ready ? "interview complete. these three cards are visual samples; idea generation based on your answers is next. type /generateIdea for a fresh set of questions." : updated.currentIndex === 5 ? "one answer needs another look. tap what i know to fix it." : "logged. next question." },
     ];
     if (ready && !editing) entries.push({ id: nextId.current++, type: "ideas" });
     dispatch({ type: "advance", draft: updated, entries, mood: updated.currentIndex === 5 ? "eureka" : "listening" });

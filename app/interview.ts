@@ -2,14 +2,14 @@ import rawBank from "./question-bank.json";
 
 export const slots = ["goal", "worlds", "scope", "toolkit", "spice"] as const;
 export type Slot = (typeof slots)[number];
-export type Question = { id: string; slot: Slot; prompt: string; suggestions?: string[] };
+export type Question = { id: string; slot: Slot; prompt: string; detailPrompt: string; suggestions?: string[] };
 export type TimeBudget = "evening" | "48h" | "week";
 export type TeamSize = "solo" | "2-3" | "4+";
 export type SlotAnswer =
-  | { slot: "goal"; goal: string }
-  | { slot: "worlds"; domains: string[] }
-  | { slot: "scope"; timeBudget: TimeBudget; teamSize: TeamSize }
-  | { slot: "toolkit"; skills: string[]; avoid?: string }
+  | { slot: "goal"; goal: string; note?: string }
+  | { slot: "worlds"; domains: string[]; note?: string }
+  | { slot: "scope"; timeBudget: TimeBudget; teamSize: TeamSize; note?: string }
+  | { slot: "toolkit"; skills: string[]; avoid?: string; note?: string }
   | { slot: "spice"; spice: 1 | 2 | 3 | 4; twistNote?: string };
 export type InterviewAnswers = {
   goal: string;
@@ -20,11 +20,13 @@ export type InterviewAnswers = {
   avoid?: string;
   spice: 1 | 2 | 3 | 4;
   twistNote?: string;
+  notes?: Partial<Record<"goal" | "worlds" | "scope" | "toolkit", string>>;
   questionIds: [string, string, string, string, string];
 };
 export type Draft = {
-  schemaVersion: 1;
+  schemaVersion: 2;
   questionIds: [string, string, string, string, string];
+  order: [Slot, Slot, Slot, Slot, Slot];
   answers: Partial<Record<Slot, SlotAnswer>>;
   currentIndex: number;
   editingSlot?: Slot;
@@ -49,7 +51,7 @@ export const teamLabels: Record<TeamSize, string> = { solo: "solo", "2-3": "2–
 function isSlot(value: string): value is Slot { return slots.includes(value as Slot); }
 export const bank: Question[] = rawBank.map(row => {
   if (!isSlot(row.slot)) throw new Error(`Invalid question slot: ${row.id}`);
-  return { id: row.id, slot: row.slot, prompt: row.prompt, ...( "suggestions" in row ? { suggestions: row.suggestions } : {}) };
+  return { id: row.id, slot: row.slot, prompt: row.prompt, detailPrompt: row.detailPrompt, ...( "suggestions" in row ? { suggestions: row.suggestions } : {}) };
 });
 if (bank.length !== 50 || new Set(bank.map(q => q.id)).size !== 50 || slots.some(slot => bank.filter(q => q.slot === slot).length !== 10)) {
   throw new Error("Question bank must contain ten unique questions in each of five slots.");
@@ -81,15 +83,22 @@ export function selectQuestions(): [string, string, string, string, string] {
   return selected;
 }
 
-export function startDraft(): Draft { return { schemaVersion: 1, questionIds: selectQuestions(), answers: {}, currentIndex: 0 }; }
-export function currentSlot(draft: Draft): Slot | undefined { return draft.editingSlot ?? slots[draft.currentIndex]; }
+export function startDraft(): Draft {
+  const order: [Slot, Slot, Slot, Slot, Slot] = randomIndex(2)
+    ? ["worlds", "goal", "scope", "toolkit", "spice"]
+    : ["goal", "worlds", "scope", "toolkit", "spice"];
+  if (randomIndex(2)) [order[2], order[3]] = [order[3], order[2]];
+  return { schemaVersion: 2, questionIds: selectQuestions(), order, answers: {}, currentIndex: 0 };
+}
+export function currentSlot(draft: Draft): Slot | undefined { return draft.editingSlot ?? draft.order[draft.currentIndex]; }
 export function completedCount(draft: Draft): number { return slots.filter(slot => draft.answers[slot]).length; }
 export function answerSummary(answer: SlotAnswer): string {
+  const withNote = (summary: string) => answer.slot !== "spice" && answer.note ? `${summary} · ${answer.note}` : summary;
   switch (answer.slot) {
-    case "goal": return goalLabels[answer.goal] ?? answer.goal;
-    case "worlds": return answer.domains.map(value => domainLabels[value] ?? value).join(" × ");
-    case "scope": return `${timeLabels[answer.timeBudget]} · ${teamLabels[answer.teamSize]}`;
-    case "toolkit": return answer.skills.length ? answer.skills.join(", ") : "no preference";
+    case "goal": return withNote(goalLabels[answer.goal] ?? answer.goal);
+    case "worlds": return withNote(answer.domains.map(value => domainLabels[value] ?? value).join(" × "));
+    case "scope": return withNote(`${timeLabels[answer.timeBudget]} · ${teamLabels[answer.teamSize]}`);
+    case "toolkit": return withNote(answer.skills.length ? answer.skills.join(", ") : "no preference");
     case "spice": return spiceLabels[answer.spice - 1] + (answer.twistNote ? ` · ${answer.twistNote}` : "");
   }
 }
@@ -101,7 +110,8 @@ export function normalizeAnswers(draft: Draft): InterviewAnswers | null {
   const toolkit = draft.answers.toolkit;
   const spice = draft.answers.spice;
   if (goal?.slot !== "goal" || worlds?.slot !== "worlds" || scope?.slot !== "scope" || toolkit?.slot !== "toolkit" || spice?.slot !== "spice") return null;
-  return { goal: goal.goal, domains: worlds.domains, timeBudget: scope.timeBudget, teamSize: scope.teamSize, skills: toolkit.skills, ...(toolkit.avoid ? { avoid: toolkit.avoid } : {}), spice: spice.spice, ...(spice.twistNote ? { twistNote: spice.twistNote } : {}), questionIds: draft.questionIds };
+  const notes = Object.fromEntries(([goal, worlds, scope, toolkit] as const).filter(answer => Boolean(answer.note)).map(answer => [answer.slot, answer.note])) as InterviewAnswers["notes"];
+  return { goal: goal.goal, domains: worlds.domains, timeBudget: scope.timeBudget, teamSize: scope.teamSize, skills: toolkit.skills, ...(toolkit.avoid ? { avoid: toolkit.avoid } : {}), spice: spice.spice, ...(spice.twistNote ? { twistNote: spice.twistNote } : {}), ...(notes && Object.keys(notes).length ? { notes } : {}), questionIds: draft.questionIds };
 }
 
 export function saveDraft(draft: Draft | null): void {
@@ -112,6 +122,7 @@ function safeText(value: unknown): value is string { return typeof value === "st
 function validAnswer(slot: Slot, value: unknown): value is SlotAnswer {
   if (!value || typeof value !== "object" || (value as {slot?: unknown}).slot !== slot) return false;
   const answer = value as Record<string, unknown>;
+  if (answer.note !== undefined && !safeText(answer.note)) return false;
   if (slot === "goal") return safeText(answer.goal) && answer.goal.length > 0;
   if (slot === "worlds") return Array.isArray(answer.domains) && answer.domains.length > 0 && answer.domains.length <= 2 && answer.domains.every(item => safeText(item) && item.length > 0);
   if (slot === "scope") return ["evening", "48h", "week"].includes(String(answer.timeBudget)) && ["solo", "2-3", "4+"].includes(String(answer.teamSize));
@@ -123,9 +134,11 @@ export function loadDraft(): Draft | null {
   try {
     const parsed: unknown = JSON.parse(localStorage.getItem("bodge-draft-v1") || "null");
     if (!parsed || typeof parsed !== "object") return null;
-    const draft = parsed as Draft;
-    if (draft.schemaVersion !== 1 || !Array.isArray(draft.questionIds) || draft.questionIds.length !== 5 || !draft.questionIds.every((id, index) => questionById.get(id)?.slot === slots[index]) || !Number.isInteger(draft.currentIndex) || draft.currentIndex < 0 || draft.currentIndex > 5 || !draft.answers || typeof draft.answers !== "object" || (draft.editingSlot && !isSlot(draft.editingSlot))) return null;
-    if (slots.some((slot, index) => index < draft.currentIndex ? !validAnswer(slot, draft.answers[slot]) : draft.answers[slot] !== undefined && !validAnswer(slot, draft.answers[slot]))) return null;
+    const stored = parsed as Draft | (Omit<Draft, "order" | "schemaVersion"> & { schemaVersion: 1 });
+    if (stored.schemaVersion !== 1 && stored.schemaVersion !== 2) return null;
+    const draft: Draft = stored.schemaVersion === 1 ? { ...stored, schemaVersion: 2, order: [...slots] } : stored;
+    if (!Array.isArray(draft.questionIds) || draft.questionIds.length !== 5 || !draft.questionIds.every((id, index) => questionById.get(id)?.slot === slots[index]) || !Array.isArray(draft.order) || draft.order.length !== 5 || !draft.order.every((slot, index) => slot === "spice" ? index === 4 : isSlot(slot)) || new Set(draft.order).size !== 5 || !Number.isInteger(draft.currentIndex) || draft.currentIndex < 0 || draft.currentIndex > 5 || !draft.answers || typeof draft.answers !== "object" || (draft.editingSlot && !isSlot(draft.editingSlot))) return null;
+    if (draft.order.some((slot, index) => index < draft.currentIndex ? !validAnswer(slot, draft.answers[slot]) : draft.answers[slot] !== undefined && !validAnswer(slot, draft.answers[slot]))) return null;
     if (draft.editingSlot && !validAnswer(draft.editingSlot, draft.answers[draft.editingSlot])) return null;
     return draft;
   } catch { return null; }

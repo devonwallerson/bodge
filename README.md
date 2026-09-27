@@ -6,7 +6,7 @@ A terminal-style project idea generator for builders and hackathon teams. A loca
 
 Use Node.js 20.9 or newer. From the repository root, run `npm install` and `npm run dev`, then open `http://localhost:3000`. Run `npm run typecheck` and `npm run build` to check the source. No provider key is needed for this preview.
 
-Run `/generateIdea` to answer five questions from the approved 50-question bank. The draft and question selection survive a reload on this device, and known answers can be changed from the side panel or mobile sheet. The resulting three ideas are still sample data. `/help`, `/theme`, `/knows`, command completion, and idea paging work locally. Accept, refine, and saved ideas currently explain that those features are coming later; they do not claim to save data.
+Run `/generateIdea` to answer five questions drawn from the 50-question bank. Each group now has ten distinct practical angles and an optional detail cue; the owner approved the revision. The draft and question selection survive a reload on this device, and known answers can be changed from the side panel or mobile sheet. The resulting three ideas are still sample data. `/help`, `/theme`, `/knows`, command completion, and idea paging work locally. Accept, refine, and saved ideas currently explain that those features are coming later; they do not claim to save data.
 
 Run `npm run check:interview` to verify the bank, recent-repeat selection, answer normalization, and draft recovery.
 

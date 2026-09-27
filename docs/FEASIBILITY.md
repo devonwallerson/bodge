@@ -32,9 +32,9 @@ Theme tokens: background, surface, border, text, muted text, primary action, cha
 
 `/generateIdea`, `/help`, `/theme`, `/savedIdeas`, and `/knows` are deterministic. `/` focuses the prompt and opens completion. Desktop keyboard shortcuts work only in the relevant state and only when the prompt is empty: number keys for options; `a`, `r`, `n` for ideas; Enter to confirm. Mobile always has visible controls and does not depend on shortcuts. Unknown commands return a helpful hint. New transcript messages auto-scroll only while the user is already at the bottom; otherwise show a jump-to-new control. Do not virtualize the short transcript.
 
-## Interview structure — bank approved 2026-09-26
+## Interview structure — revised bank approved
 
-The [question bank](QUESTION_BANK.md) contains 50 approved questions, ten in each of five groups. For each run, select one goal, one worlds/domain, one time-and-team scope, one toolkit, and one spice question. The five sample prompts below show the direction; they are no longer a fixed script.
+The [question bank](QUESTION_BANK.md) contains 50 questions, ten in each of five groups. The owner approved a substantive revision after finding the original variants repetitive. For each run, select one goal, one worlds/domain, one time-and-team scope, one toolkit, and one spice question. Each variant has a distinct practical angle and an optional detail cue while required controls continue to produce stable answers.
 
 | Slot | Proposed prompt | Input | Stored answer |
 | --- | --- | --- | --- |
@@ -44,7 +44,7 @@ The [question bank](QUESTION_BANK.md) contains 50 approved questions, ten in eac
 | 4 | “What can you build with, and what should I avoid?” | Skill chips plus optional text; no preference available | `skills[]`, `avoid` |
 | 5 | “How weird may this get?” | Sensible / quirky / spicy / unhinged; optional constraint | `spice`, `extraConstraint` |
 
-The five turns produce six sidebar labels (`vibe`, `field`, `time`, `team`, `skills`, `spice`) because the scope turn contains two quick controls. Every answer can be edited from the panel/sheet. Editing affects future generations and does not rewrite already generated ideas. “Surprise me” resolves to a valid explicit value. The owner approved the bank's wording and choices on 2026-09-26.
+The five turns produce six sidebar labels (`vibe`, `field`, `time`, `team`, `skills`, `spice`) because the scope turn contains two quick controls. Optional details for the first four slots are retained in normalized `notes`; the spice detail remains `twistNote`. Every answer can be edited from the panel/sheet. Editing affects future generations and does not rewrite already generated ideas. “Surprise me” resolves to a valid explicit value. Physical-device checks and several full runs remain before M2 closes.
 
 ## State, schema, and persistence
 
@@ -97,4 +97,4 @@ The owner will eventually need a GitHub account/repository, a model-provider pro
 
 ## Open decisions
 
-Confirmed: useful with a funny twist; local persistence; original renderings guide the shell and the new card concept guides cards; five questions drawn from a 50-question bank; public GitHub repository under `devonwallerson`. The owner approved the question bank on 2026-09-26. Pending: owner feedback on the new card concept, final card copy, hosting provider, model provider and budget, and optional domain. These do not block the shell prototype with fake ideas. Keep this plan and the [acceptance criteria](ACCEPTANCE_CRITERIA.md) current as the implementation reveals constraints.
+Confirmed: useful with a funny twist; local persistence; original renderings guide the shell and the new card concept guides cards; five questions drawn from a 50-question bank; public GitHub repository under `devonwallerson`. The owner approved the revised question angles. Pending: physical-device testing, owner feedback on the new card concept, final card copy, hosting provider, model provider and budget, and optional domain. These do not block the shell prototype with fake ideas. Keep this plan and the [acceptance criteria](ACCEPTANCE_CRITERIA.md) current as the implementation reveals constraints.

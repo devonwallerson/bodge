@@ -8,7 +8,7 @@ Updated 2026-09-26. This is the executable checklist derived from the [living fe
 
 | ID | Observable result / check | Status |
 | --- | --- | --- |
-| M0-01 | Owner reviews the 50-question bank, five coverage slots, choices, and sidebar labels; approved wording is recorded in `QUESTION_BANK.md`. | Done: owner approved the bank on 2026-09-26 |
+| M0-01 | Owner reviews the 50-question bank, five coverage slots, choices, and sidebar labels; approved wording is recorded in `QUESTION_BANK.md`. | Done: owner approved the substantive revision in this session |
 | M0-02 | Git repo has `main`, a safe `.gitignore`, and a README linking these plans; no secrets are tracked. | Done |
 | M0-03 | Public `devonwallerson/bodge` remote exists and local `main` tracks `origin/main`. | Done |
 | M0-04 | Model provider is chosen after a structured-output smoke test; key stays outside Git and server build output. | Blocked: provider account/key |
@@ -31,9 +31,9 @@ M1-06 is the first technical spike. Record the tested OS/browser versions and an
 
 | ID | Observable result / check | Status |
 | --- | --- | --- |
-| M2-01 | Bank contains 50 unique question IDs, ten per slot; new questions require no new screen component. | Done: typed bank and check script cover 50 unique IDs and ten per slot |
+| M2-01 | Bank contains 50 unique question IDs, ten per slot; new questions require no new screen component. | Done: typed bank and check script cover 50 unique IDs and ten per slot, each with an optional detail cue |
 | M2-02 | `/generateIdea` selects one from each slot, asks exactly five turns, and normalizes answers into the same schema; refresh does not reshuffle an active run. | In progress: full browser flow, refresh recovery, and normalization pass; real phone check remains |
-| M2-07 | New runs avoid variants used in the last two sessions when alternatives exist; several runs feel different in manual review. | In progress: automated three-run repeat check passes; owner should review several full runs |
+| M2-07 | New runs avoid variants used in the last two sessions when alternatives exist; several runs feel different in manual review. | In progress: repeat and order checks pass; owner approved the revised angles, but several full runs still need review |
 | M2-03 | Desktop number keys, arrow selection, Enter, and mobile 44 px tap rows work; free text never triggers idea shortcuts. | In progress: browser keyboard and 390 px layout checked; physical touch remains |
 | M2-04 | Progress and “what Bodge knows” update from the same answer state on desktop and mobile. | In progress: browser flow showed six live labels and shared progress; real phone check remains |
 | M2-05 | Editing one answer from panel/sheet re-asks only that item and preserves the other answers. | In progress: browser edit preserved 5/5 progress and sample cards; real phone check remains |
@@ -76,7 +76,7 @@ M1-06 is the first technical spike. Record the tested OS/browser versions and an
 
 1. Clear site data and open the live URL. Bodge is idle, intro/commands are legible.
 2. Run `/help`, change a theme, reload, and confirm the theme persists without flash.
-3. Run `/generateIdea`, answer the five approved questions, and edit one answer from the side panel/sheet.
+3. Run `/generateIdea`, answer the five selected questions, and edit one answer from the side panel/sheet.
 4. Watch thinking and the validated reveal; inspect all three cards and move to card 2 by keyboard or touch.
 5. Accept card 2, reload, open `/savedIdeas`, and reopen it.
 6. Refine that card with “make it multiplayer”; compare new and original versions.

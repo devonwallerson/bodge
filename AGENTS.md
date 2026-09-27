@@ -4,6 +4,6 @@ Read [docs/IMPLEMENTATION_HANDOFF.md](docs/IMPLEMENTATION_HANDOFF.md), [docs/FEA
 
 The repository contains a Next.js shell preview and planning references. Do not assume an AI endpoint, provider API key, hosting connection, or end-user authentication exists. Use mock ideas until the provider milestone. Work in the repository root and preserve the reference files and planning history.
 
-Keep the app accountless in v1. Accepted ideas persist on the current device. Generate three useful ideas with a funny twist. The interview draws exactly five questions from the 50-question bank, one per coverage slot. The owner approved the bank on 2026-09-26; physical device checks remain before the interview milestone closes.
+Keep the app accountless in v1. Accepted ideas persist on the current device. Generate three useful ideas with a funny twist. The interview draws exactly five questions from the 50-question bank, one per coverage slot. The owner approved the revised bank; physical device checks remain before the interview milestone closes.
 
 Update the acceptance checklist as milestones are verified. Keep credentials in ignored local files or host secrets. GitHub repository: `https://github.com/devonwallerson/bodge`.

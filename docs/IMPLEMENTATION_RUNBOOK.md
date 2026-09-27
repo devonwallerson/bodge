@@ -6,7 +6,7 @@ Use this file to resume work in a new session. Start with [IMPLEMENTATION_HANDOF
 
 - Planning documents and visual references are saved in this repository. The M1 shell preview was approved and pushed as `fc73938`. The M2 interview and revised fixture results are pushed on `codex/m2-interview` for continuation. Run `npm install`, `npm run dev`, `npm run typecheck`, `npm run check:interview`, and `npm run build` from the root.
 - Git is initialized on `main`; the public remote is `https://github.com/devonwallerson/bodge.git`, and `main` tracks `origin/main`. No deployment exists yet.
-- Owner confirmed local saved ideas, “useful with a funny twist,” and five questions drawn from the approved 50-question bank in `QUESTION_BANK.md`.
+- Owner confirmed local saved ideas, “useful with a funny twist,” and five questions drawn from the 50-question bank in `QUESTION_BANK.md`. The revised angles and detail cues are approved.
 - The interview uses real bank questions but still ends with sample ideas. Physical-device checks and several-run owner review remain before merging M2 into `main`.
 
 ## Build sequence
@@ -42,4 +42,4 @@ GitHub Pages hosts static files and cannot run the secret-bearing model API. Use
 
 ## Resume prompt for a future implementation session
 
-> Build Bodge following `docs/FEASIBILITY.md`, `docs/QUESTION_BANK.md`, `docs/IDEA_CARD_DESIGN.md`, and `docs/ACCEPTANCE_CRITERIA.md`. Use the original `bodge-desktop.png` and `bodge-mobile.png` for the shell, and the newer `idea-card-concept-desktop.png` and `idea-card-concept-mobile.png` for cards. Start with the earliest uncompleted milestone, update status as you go, and test mobile and desktop together. Keep secrets out of Git. The 50-question bank was approved on 2026-09-26; ask for model-provider/hosting account details only at the handoff where needed. Preserve the local-save and useful-with-funny-twist decisions.
+> Build Bodge following `docs/FEASIBILITY.md`, `docs/QUESTION_BANK.md`, `docs/IDEA_CARD_DESIGN.md`, and `docs/ACCEPTANCE_CRITERIA.md`. Use the original `bodge-desktop.png` and `bodge-mobile.png` for the shell, and the newer `idea-card-concept-desktop.png` and `idea-card-concept-mobile.png` for cards. Start with the earliest uncompleted milestone, update status as you go, and test mobile and desktop together. Keep secrets out of Git. The revised 50-question bank is owner-approved; ask for model-provider/hosting account details only at the handoff where needed. Preserve the local-save and useful-with-funny-twist decisions.
