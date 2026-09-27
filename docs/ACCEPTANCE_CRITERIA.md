@@ -35,8 +35,8 @@ M1-06 is the first technical spike. Record the tested OS/browser versions and an
 | M2-02 | `/generateIdea` selects one from each slot, asks exactly five turns, and normalizes answers into the same schema; refresh does not reshuffle an active run. | In progress: full browser flow, refresh recovery, and normalization pass; real phone check remains |
 | M2-07 | New runs avoid variants used in the last two sessions when alternatives exist; several runs feel different in manual review. | In progress: repeat and order checks pass; owner approved the revised angles, but several full runs still need review |
 | M2-03 | Desktop number keys, arrow selection, Enter, and mobile 44 px tap rows work; free text never triggers idea shortcuts. | In progress: browser keyboard and 390 px layout checked; physical touch remains |
-| M2-04 | Progress and “what Bodge knows” update from the same answer state on desktop and mobile. | In progress: browser flow showed six live labels and shared progress; real phone check remains |
-| M2-05 | Editing one answer from panel/sheet re-asks only that item and preserves the other answers. | In progress: browser edit preserved 5/5 progress and sample cards; real phone check remains |
+| M2-04 | Progress and “what Bodge knows” update from the same answer state on desktop and mobile. | In progress: desktop and 390 px browser runs show one live five-answer summary, six sidebar labels, and shared progress; real phone check remains |
+| M2-05 | Editing one answer from panel/sheet re-asks only that item and preserves the other answers. | In progress: browser edit updated one summary row and preserved 5/5 progress and sample cards; real phone check remains |
 | M2-06 | Mobile sheet opens/closes by tap and system back/Escape; focus returns to its trigger. | In progress: browser Back/Escape and focus return pass; physical touch remains |
 
 ## M3 — AI generation and idea cards
