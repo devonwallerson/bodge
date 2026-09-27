@@ -1,13 +1,13 @@
 # Bodge — implementation runbook
 
-Use this file to resume work in a new session. Start with [IMPLEMENTATION_HANDOFF.md](IMPLEMENTATION_HANDOFF.md), then read [FEASIBILITY.md](FEASIBILITY.md), [QUESTION_BANK.md](QUESTION_BANK.md), and [ACCEPTANCE_CRITERIA.md](ACCEPTANCE_CRITERIA.md). The [desktop](reference/design/bodge-desktop.png) and [mobile](reference/design/bodge-mobile.png) renderings are the UI reference. The two original Claude texts are preserved under `reference/source/`; treat their implementation choices as proposals where the living plan differs.
+Use this file to resume work in a new session. Start with [IMPLEMENTATION_HANDOFF.md](IMPLEMENTATION_HANDOFF.md), then read [FEASIBILITY.md](FEASIBILITY.md), [QUESTION_BANK.md](QUESTION_BANK.md), [IDEA_CARD_DESIGN.md](IDEA_CARD_DESIGN.md), and [ACCEPTANCE_CRITERIA.md](ACCEPTANCE_CRITERIA.md). The original [desktop](reference/design/bodge-desktop.png) and [mobile](reference/design/bodge-mobile.png) renderings guide the shell. The newer [desktop card](reference/design/idea-card-concept-desktop.png) and [mobile card](reference/design/idea-card-concept-mobile.png) renderings guide idea cards. The two original Claude texts are preserved under `reference/source/`; treat their implementation choices as proposals where the living plan differs.
 
 ## Current state
 
-- Planning documents and visual references are saved in this repository. An M1 Next.js shell preview has been added locally with fixture transcript, three sample cards, themes, commands, and a mobile knowledge sheet. Run `npm install`, `npm run dev`, `npm run typecheck`, and `npm run build` from the root.
-- Git is initialized on `main`; the public remote is `https://github.com/devonwallerson/bodge.git`, and `main` tracks `origin/main`. No application code or deployment exists yet.
-- Owner confirmed local saved ideas, “useful with a funny twist,” and five questions drawn from a bank of about 50. A draft bank with 50 questions is in `QUESTION_BANK.md`.
-- The shell uses fake data while the bank wording is reviewed. Do not mark M2 complete until the owner approves the bank. The local M1 changes have not been pushed; honor the owner's manual verification request.
+- Planning documents and visual references are saved in this repository. The M1 shell preview was approved and pushed as `fc73938`. The M2 interview and revised fixture results are pushed on `codex/m2-interview` for continuation. Run `npm install`, `npm run dev`, `npm run typecheck`, `npm run check:interview`, and `npm run build` from the root.
+- Git is initialized on `main`; the public remote is `https://github.com/devonwallerson/bodge.git`, and `main` tracks `origin/main`. No deployment exists yet.
+- Owner confirmed local saved ideas, “useful with a funny twist,” and five questions drawn from the approved 50-question bank in `QUESTION_BANK.md`.
+- The interview uses real bank questions but still ends with sample ideas. Physical-device checks and several-run owner review remain before merging M2 into `main`.
 
 ## Build sequence
 
@@ -42,4 +42,4 @@ GitHub Pages hosts static files and cannot run the secret-bearing model API. Use
 
 ## Resume prompt for a future implementation session
 
-> Build Bodge following `docs/FEASIBILITY.md`, `docs/QUESTION_BANK.md`, and `docs/ACCEPTANCE_CRITERIA.md`. Use `docs/reference/design/bodge-desktop.png` and `docs/reference/design/bodge-mobile.png` as the visual source of truth. Start with the earliest uncompleted milestone, update status as you go, and test mobile and desktop together. Keep secrets out of Git. Ask for review of the 50-question bank before declaring M2 complete, and ask for model-provider/hosting account details only at the handoff where they are needed. Preserve the local-save and useful-with-funny-twist decisions.
+> Build Bodge following `docs/FEASIBILITY.md`, `docs/QUESTION_BANK.md`, `docs/IDEA_CARD_DESIGN.md`, and `docs/ACCEPTANCE_CRITERIA.md`. Use the original `bodge-desktop.png` and `bodge-mobile.png` for the shell, and the newer `idea-card-concept-desktop.png` and `idea-card-concept-mobile.png` for cards. Start with the earliest uncompleted milestone, update status as you go, and test mobile and desktop together. Keep secrets out of Git. The 50-question bank was approved on 2026-09-26; ask for model-provider/hosting account details only at the handoff where needed. Preserve the local-save and useful-with-funny-twist decisions.

@@ -1,0 +1,472 @@
+[
+  {
+    "id": "G01",
+    "slot": "goal",
+    "prompt": "What kind of win are we after?",
+    "suggestions": [
+      "solve",
+      "learn",
+      "impress",
+      "laugh",
+      "surprise"
+    ]
+  },
+  {
+    "id": "G02",
+    "slot": "goal",
+    "prompt": "When this is done, what would make you say “worth it”?",
+    "suggestions": [
+      "solve",
+      "portfolio",
+      "community",
+      "experiment",
+      "surprise"
+    ]
+  },
+  {
+    "id": "G03",
+    "slot": "goal",
+    "prompt": "Who are we trying to delight first: you, judges, friends, or strangers?",
+    "suggestions": [
+      "learn",
+      "impress",
+      "laugh",
+      "community",
+      "money"
+    ]
+  },
+  {
+    "id": "G04",
+    "slot": "goal",
+    "prompt": "Is this a useful tool, a great demo, or a glorious experiment?",
+    "suggestions": [
+      "solve",
+      "impress",
+      "experiment",
+      "portfolio",
+      "surprise"
+    ]
+  },
+  {
+    "id": "G05",
+    "slot": "goal",
+    "prompt": "What would you most like to show someone on Sunday night?",
+    "suggestions": [
+      "portfolio",
+      "impress",
+      "laugh",
+      "learn",
+      "solve"
+    ]
+  },
+  {
+    "id": "G06",
+    "slot": "goal",
+    "prompt": "Pick the mission Bodge should optimize for.",
+    "suggestions": [
+      "solve",
+      "learn",
+      "community",
+      "money",
+      "experiment"
+    ]
+  },
+  {
+    "id": "G07",
+    "slot": "goal",
+    "prompt": "Should this teach you something or prove what you already know?",
+    "suggestions": [
+      "learn",
+      "portfolio",
+      "impress",
+      "experiment",
+      "surprise"
+    ]
+  },
+  {
+    "id": "G08",
+    "slot": "goal",
+    "prompt": "What should your teammates thank you for building?",
+    "suggestions": [
+      "solve",
+      "community",
+      "laugh",
+      "impress",
+      "money"
+    ]
+  },
+  {
+    "id": "G09",
+    "slot": "goal",
+    "prompt": "Is the headline “it helps,” “it slaps,” or “why does this exist?”",
+    "suggestions": [
+      "solve",
+      "impress",
+      "experiment",
+      "laugh",
+      "portfolio"
+    ]
+  },
+  {
+    "id": "G10",
+    "slot": "goal",
+    "prompt": "If Bodge could give you one outcome, which one?",
+    "suggestions": [
+      "solve",
+      "learn",
+      "portfolio",
+      "community",
+      "surprise"
+    ]
+  },
+  {
+    "id": "W01",
+    "slot": "worlds",
+    "prompt": "Which worlds should collide?",
+    "suggestions": [
+      "games",
+      "climate",
+      "health",
+      "education",
+      "art",
+      "productivity"
+    ]
+  },
+  {
+    "id": "W02",
+    "slot": "worlds",
+    "prompt": "Where should this little contraption live?",
+    "suggestions": [
+      "local",
+      "food",
+      "music",
+      "travel",
+      "games",
+      "civic"
+    ]
+  },
+  {
+    "id": "W03",
+    "slot": "worlds",
+    "prompt": "Pick two unlikely neighbors for this idea.",
+    "suggestions": [
+      "climate",
+      "games",
+      "finance",
+      "art",
+      "health",
+      "sports"
+    ]
+  },
+  {
+    "id": "W04",
+    "slot": "worlds",
+    "prompt": "Whose corner of the internet are we building for?",
+    "suggestions": [
+      "education",
+      "accessibility",
+      "music",
+      "productivity",
+      "civic",
+      "entertainment"
+    ]
+  },
+  {
+    "id": "W05",
+    "slot": "worlds",
+    "prompt": "What topics would keep you tinkering past midnight?",
+    "suggestions": [
+      "science",
+      "games",
+      "art",
+      "food",
+      "travel",
+      "climate"
+    ]
+  },
+  {
+    "id": "W06",
+    "slot": "worlds",
+    "prompt": "Which space needs a better weekend project?",
+    "suggestions": [
+      "health",
+      "local",
+      "education",
+      "finance",
+      "productivity",
+      "accessibility"
+    ]
+  },
+  {
+    "id": "W07",
+    "slot": "worlds",
+    "prompt": "Choose a serious world and a playful one, if you like.",
+    "suggestions": [
+      "climate",
+      "health",
+      "finance",
+      "games",
+      "music",
+      "entertainment"
+    ]
+  },
+  {
+    "id": "W08",
+    "slot": "worlds",
+    "prompt": "What do you already have opinions about?",
+    "suggestions": [
+      "sports",
+      "food",
+      "local",
+      "civic",
+      "travel",
+      "productivity"
+    ]
+  },
+  {
+    "id": "W09",
+    "slot": "worlds",
+    "prompt": "If Bodge mashed up two tabs in your browser, which tabs?",
+    "suggestions": [
+      "science",
+      "art",
+      "finance",
+      "games",
+      "education",
+      "music"
+    ]
+  },
+  {
+    "id": "W10",
+    "slot": "worlds",
+    "prompt": "Give me a field, or give me two and make it weird.",
+    "suggestions": [
+      "accessibility",
+      "climate",
+      "local",
+      "entertainment",
+      "health",
+      "science"
+    ]
+  },
+  {
+    "id": "S01",
+    "slot": "scope",
+    "prompt": "What do we have to work with: time and humans?"
+  },
+  {
+    "id": "S02",
+    "slot": "scope",
+    "prompt": "Is this an evening solo sprint or a team weekend?"
+  },
+  {
+    "id": "S03",
+    "slot": "scope",
+    "prompt": "How much calendar and how many keyboards can I borrow?"
+  },
+  {
+    "id": "S04",
+    "slot": "scope",
+    "prompt": "Set the build budget: hours first, teammates second."
+  },
+  {
+    "id": "S05",
+    "slot": "scope",
+    "prompt": "Before I get carried away, what's the deadline and crew size?"
+  },
+  {
+    "id": "S06",
+    "slot": "scope",
+    "prompt": "How long until demo time, and who's building?"
+  },
+  {
+    "id": "S07",
+    "slot": "scope",
+    "prompt": "Tell me the size of the sandbox."
+  },
+  {
+    "id": "S08",
+    "slot": "scope",
+    "prompt": "Is this a quick sketch, a hackathon, or a weeklong build?"
+  },
+  {
+    "id": "S09",
+    "slot": "scope",
+    "prompt": "How ambitious may the implementation be, in time and people?"
+  },
+  {
+    "id": "S10",
+    "slot": "scope",
+    "prompt": "Give Bodge a clock and a headcount."
+  },
+  {
+    "id": "T01",
+    "slot": "toolkit",
+    "prompt": "What's already in your toolbox?",
+    "suggestions": [
+      "TypeScript",
+      "Python",
+      "React",
+      "design",
+      "hardware"
+    ]
+  },
+  {
+    "id": "T02",
+    "slot": "toolkit",
+    "prompt": "What can you build without looking up every other line?",
+    "suggestions": [
+      "JavaScript",
+      "Python",
+      "SQL",
+      "mobile",
+      "no-code"
+    ]
+  },
+  {
+    "id": "T03",
+    "slot": "toolkit",
+    "prompt": "What new tool are you willing to learn, and what should I avoid?",
+    "suggestions": [
+      "AI API",
+      "mapping",
+      "data viz",
+      "games",
+      "hardware"
+    ]
+  },
+  {
+    "id": "T04",
+    "slot": "toolkit",
+    "prompt": "Are we strongest in screens, servers, data, or physical stuff?",
+    "suggestions": [
+      "frontend",
+      "backend",
+      "data",
+      "design",
+      "hardware"
+    ]
+  },
+  {
+    "id": "T05",
+    "slot": "toolkit",
+    "prompt": "Pick your comfortable ingredients.",
+    "suggestions": [
+      "React",
+      "Node",
+      "Python",
+      "Figma",
+      "spreadsheets"
+    ]
+  },
+  {
+    "id": "T06",
+    "slot": "toolkit",
+    "prompt": "What should the stack lean on?",
+    "suggestions": [
+      "web",
+      "mobile",
+      "AI API",
+      "local data",
+      "sensors"
+    ]
+  },
+  {
+    "id": "T07",
+    "slot": "toolkit",
+    "prompt": "Which part would your team happily own?",
+    "suggestions": [
+      "UI",
+      "backend",
+      "data",
+      "storytelling",
+      "integrations"
+    ]
+  },
+  {
+    "id": "T08",
+    "slot": "toolkit",
+    "prompt": "Any tool you want to use or definitely never touch?",
+    "suggestions": [
+      "TypeScript",
+      "Python",
+      "AI API",
+      "maps",
+      "no-code"
+    ]
+  },
+  {
+    "id": "T09",
+    "slot": "toolkit",
+    "prompt": "What's your unfair technical advantage today?",
+    "suggestions": [
+      "frontend",
+      "backend",
+      "design",
+      "ML",
+      "domain knowledge"
+    ]
+  },
+  {
+    "id": "T10",
+    "slot": "toolkit",
+    "prompt": "What skills are in the room, even if they're not coding?",
+    "suggestions": [
+      "research",
+      "writing",
+      "design",
+      "data",
+      "hardware"
+    ]
+  },
+  {
+    "id": "P01",
+    "slot": "spice",
+    "prompt": "How weird may this get?"
+  },
+  {
+    "id": "P02",
+    "slot": "spice",
+    "prompt": "Where is the dial: useful, quirky, spicy, or unhinged?"
+  },
+  {
+    "id": "P03",
+    "slot": "spice",
+    "prompt": "How much “wait, what?” should the demo earn?"
+  },
+  {
+    "id": "P04",
+    "slot": "spice",
+    "prompt": "Should the joke be a wink or the whole costume?"
+  },
+  {
+    "id": "P05",
+    "slot": "spice",
+    "prompt": "How brave are we feeling about the twist?"
+  },
+  {
+    "id": "P06",
+    "slot": "spice",
+    "prompt": "Give this idea a chaos budget."
+  },
+  {
+    "id": "P07",
+    "slot": "spice",
+    "prompt": "How far can Bodge wander before you pull the leash?"
+  },
+  {
+    "id": "P08",
+    "slot": "spice",
+    "prompt": "Do you want a safe bet or an excellent eyebrow raise?"
+  },
+  {
+    "id": "P09",
+    "slot": "spice",
+    "prompt": "Choose the spice level for the pitch and the product."
+  },
+  {
+    "id": "P10",
+    "slot": "spice",
+    "prompt": "How much nonsense can the MVP carry while still working?"
+  }
+]

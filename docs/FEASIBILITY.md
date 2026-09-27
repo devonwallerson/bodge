@@ -1,6 +1,6 @@
 # Bodge — living feasibility and product specification
 
-Updated 2026-09-26. This is the canonical specification for implementation. The [desktop rendering](reference/design/bodge-desktop.png), [mobile renderings](reference/design/bodge-mobile.png), [Claude feasibility](reference/source/claude-feasibility.txt), and [Claude acceptance plan](reference/source/claude-acceptance-criteria.txt) are preserved as sources. The renderings are the visual source of truth; this document resolves scope and technical choices.
+Updated 2026-09-26. This is the canonical specification for implementation. The [desktop rendering](reference/design/bodge-desktop.png), [mobile renderings](reference/design/bodge-mobile.png), [new idea card concept](IDEA_CARD_DESIGN.md), [Claude feasibility](reference/source/claude-feasibility.txt), and [Claude acceptance plan](reference/source/claude-acceptance-criteria.txt) are preserved as sources. The original renderings guide the overall UI; the new concept takes precedence for idea cards. This document resolves scope and technical choices.
 
 ## Product and confirmed decisions
 
@@ -16,11 +16,11 @@ One responsive terminal-style page, Bodge avatar and event-driven moods, determi
 
 ### Desktop
 
-Match the centered dark window, subtle dotted outer field, one-pixel dividers, title bar, Bodge sprite, `bodge ~/idea-lab`, status pill, and five theme swatches. The left transcript scrolls; the fixed right panel shows current answers and commands; the composer remains at the bottom. Idea cards use a thin outlined `<article>` with the small title set into the top border, a prominent project name, one-line hook, and `problem`, `loop`, `stack`, and `stretch` rows. Show idea number, tags, scope, spice, actions, and pool position as in the rendering.
+Match the centered dark window, subtle dotted outer field, one-pixel dividers, title bar, Bodge sprite, `bodge ~/idea-lab`, status pill, and five theme swatches. The left transcript scrolls; the fixed right panel shows current answers and commands; the composer remains at the bottom. Use the [revised idea result specification and desktop/mobile renderings](IDEA_CARD_DESIGN.md): transparent transcript background, thin output gutter, compact command-style metadata, title and hook first, and aligned `problem`, `loop`, `stack`, and `stretch` rows. The original renderings' bordered card and spice meter are superseded for ideas.
 
 ### Mobile
 
-Use the same conversation state and components. The progress strip opens “what Bodge knows” as a bottom sheet. Question options are full-width rows with at least 44 px tap targets. Idea fields stack vertically. Three ideas page by swipe **and** visible previous/next controls. Keep the action row and composer reachable above the on-screen keyboard. The sheet supports re-answering and shows commands. The mobile image shows Terminal, Magenta, and Indigo; Blue and Matcha follow the same visual rules.
+Use the same conversation state and components. The progress strip opens “what Bodge knows” as a bottom sheet. Question options are full-width rows with at least 44 px tap targets. Idea fields stack vertically as in the [new mobile card rendering](reference/design/idea-card-concept-mobile.png). Three ideas page by swipe **and** visible previous/next controls. Keep the action row and composer reachable above the on-screen keyboard. The sheet supports re-answering and shows commands. The original mobile image shows Terminal, Magenta, and Indigo; Blue and Matcha follow the same visual rules.
 
 ### Character, text, and themes
 
@@ -32,9 +32,9 @@ Theme tokens: background, surface, border, text, muted text, primary action, cha
 
 `/generateIdea`, `/help`, `/theme`, `/savedIdeas`, and `/knows` are deterministic. `/` focuses the prompt and opens completion. Desktop keyboard shortcuts work only in the relevant state and only when the prompt is empty: number keys for options; `a`, `r`, `n` for ideas; Enter to confirm. Mobile always has visible controls and does not depend on shortcuts. Unknown commands return a helpful hint. New transcript messages auto-scroll only while the user is already at the bottom; otherwise show a jump-to-new control. Do not virtualize the short transcript.
 
-## Interview structure — owner review needed before milestone 2
+## Interview structure — bank approved 2026-09-26
 
-The [question bank](QUESTION_BANK.md) contains 50 proposed questions, ten in each of five groups. For each run, select one goal, one worlds/domain, one time-and-team scope, one toolkit, and one spice question. The five sample prompts below show the direction; they are no longer a fixed script.
+The [question bank](QUESTION_BANK.md) contains 50 approved questions, ten in each of five groups. For each run, select one goal, one worlds/domain, one time-and-team scope, one toolkit, and one spice question. The five sample prompts below show the direction; they are no longer a fixed script.
 
 | Slot | Proposed prompt | Input | Stored answer |
 | --- | --- | --- | --- |
@@ -44,7 +44,7 @@ The [question bank](QUESTION_BANK.md) contains 50 proposed questions, ten in eac
 | 4 | “What can you build with, and what should I avoid?” | Skill chips plus optional text; no preference available | `skills[]`, `avoid` |
 | 5 | “How weird may this get?” | Sensible / quirky / spicy / unhinged; optional constraint | `spice`, `extraConstraint` |
 
-The five turns produce six sidebar labels (`vibe`, `field`, `time`, `team`, `skills`, `spice`) because the scope turn contains two quick controls. Every answer can be edited from the panel/sheet. Editing affects future generations and does not rewrite already generated ideas. “Surprise me” resolves to a valid explicit value. Confirm the bank's wording, domain set, and what “unhinged” means before the question flow is declared complete.
+The five turns produce six sidebar labels (`vibe`, `field`, `time`, `team`, `skills`, `spice`) because the scope turn contains two quick controls. Every answer can be edited from the panel/sheet. Editing affects future generations and does not rewrite already generated ideas. “Surprise me” resolves to a valid explicit value. The owner approved the bank's wording and choices on 2026-09-26.
 
 ## State, schema, and persistence
 
@@ -97,4 +97,4 @@ The owner will eventually need a GitHub account/repository, a model-provider pro
 
 ## Open decisions
 
-Confirmed: useful with a funny twist; local persistence; the supplied renderings guide UI; five questions drawn from a 50-question bank; public GitHub repository under `devonwallerson`. Pending: review of the drafted bank's wording/choices, final card copy, hosting provider, model provider and budget, and optional domain. These do not block the shell prototype with fake ideas. Keep this plan and the [acceptance criteria](ACCEPTANCE_CRITERIA.md) current as the implementation reveals constraints.
+Confirmed: useful with a funny twist; local persistence; original renderings guide the shell and the new card concept guides cards; five questions drawn from a 50-question bank; public GitHub repository under `devonwallerson`. The owner approved the question bank on 2026-09-26. Pending: owner feedback on the new card concept, final card copy, hosting provider, model provider and budget, and optional domain. These do not block the shell prototype with fake ideas. Keep this plan and the [acceptance criteria](ACCEPTANCE_CRITERIA.md) current as the implementation reveals constraints.

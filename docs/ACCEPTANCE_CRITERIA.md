@@ -2,7 +2,7 @@
 
 Updated 2026-09-26. This is the executable checklist derived from the [living feasibility](FEASIBILITY.md) and the [original Claude criteria](reference/source/claude-acceptance-criteria.txt). IDs remain stable. Status values: `Not started`, `In progress`, `Blocked`, `Done`. Add a short note to any blocked row. A milestone closes when every row passes; a later milestone may begin early when work is independent.
 
-**Common check:** each UI criterion is checked at 390 px on a real phone and at 1440 px desktop, in the relevant themes, with touch and keyboard as appropriate. No console errors or unsafe TypeScript escape hatches are accepted. “Matches the rendering” means comparing the implementation beside [desktop](reference/design/bodge-desktop.png) and [mobile](reference/design/bodge-mobile.png), allowing only documented accessibility and browser changes.
+**Common check:** each UI criterion is checked at 390 px on a real phone and at 1440 px desktop, in the relevant themes, with touch and keyboard as appropriate. No console errors or unsafe TypeScript escape hatches are accepted. Compare the overall shell with the original [desktop](reference/design/bodge-desktop.png) and [mobile](reference/design/bodge-mobile.png) images; compare idea cards with the newer [desktop card](reference/design/idea-card-concept-desktop.png) and [mobile card](reference/design/idea-card-concept-mobile.png) concepts. Allow documented accessibility and browser changes.
 
 ## M0 — Decisions and environment
 
@@ -31,13 +31,13 @@ M1-06 is the first technical spike. Record the tested OS/browser versions and an
 
 | ID | Observable result / check | Status |
 | --- | --- | --- |
-| M2-01 | Bank contains 50 unique question IDs, ten per slot; new questions require no new screen component. | Not started |
-| M2-02 | `/generateIdea` selects one from each slot, asks exactly five turns, and normalizes answers into the same schema; refresh does not reshuffle an active run. | Not started |
-| M2-07 | New runs avoid variants used in the last two sessions when alternatives exist; several runs feel different in manual review. | Not started |
-| M2-03 | Desktop number keys, arrow selection, Enter, and mobile 44 px tap rows work; free text never triggers idea shortcuts. | Not started |
-| M2-04 | Progress and “what Bodge knows” update from the same answer state on desktop and mobile. | Not started |
-| M2-05 | Editing one answer from panel/sheet re-asks only that item and preserves the other answers. | Not started |
-| M2-06 | Mobile sheet opens/closes by tap and system back/Escape; focus returns to its trigger. | Not started |
+| M2-01 | Bank contains 50 unique question IDs, ten per slot; new questions require no new screen component. | Done: typed bank and check script cover 50 unique IDs and ten per slot |
+| M2-02 | `/generateIdea` selects one from each slot, asks exactly five turns, and normalizes answers into the same schema; refresh does not reshuffle an active run. | In progress: full browser flow, refresh recovery, and normalization pass; real phone check remains |
+| M2-07 | New runs avoid variants used in the last two sessions when alternatives exist; several runs feel different in manual review. | In progress: automated three-run repeat check passes; owner should review several full runs |
+| M2-03 | Desktop number keys, arrow selection, Enter, and mobile 44 px tap rows work; free text never triggers idea shortcuts. | In progress: browser keyboard and 390 px layout checked; physical touch remains |
+| M2-04 | Progress and “what Bodge knows” update from the same answer state on desktop and mobile. | In progress: browser flow showed six live labels and shared progress; real phone check remains |
+| M2-05 | Editing one answer from panel/sheet re-asks only that item and preserves the other answers. | In progress: browser edit preserved 5/5 progress and sample cards; real phone check remains |
+| M2-06 | Mobile sheet opens/closes by tap and system back/Escape; focus returns to its trigger. | In progress: browser Back/Escape and focus return pass; physical touch remains |
 
 ## M3 — AI generation and idea cards
 
@@ -48,7 +48,7 @@ M1-06 is the first technical spike. Record the tested OS/browser versions and an
 | M3-03 | Invalid/incomplete/provider-error cases return typed recoverable errors; the UI shows confused Bodge and retry, never a blank card. | Not started |
 | M3-04 | Key is server-only; public endpoint enforces request limits and shared/host rate limiting before launch. | Not started |
 | M3-05 | Thinking appears immediately. Validated card content reveals briefly and can be skipped; screen readers hear complete content once. | Not started |
-| M3-06 | The outlined card, inset border label, typography, field order, scope/tags/spice, and action row match both renderings. | Not started |
+| M3-06 | Idea result matches the [revised terminal design contract](IDEA_CARD_DESIGN.md) at desktop and mobile sizes: no filled card surface or outer box, compact gutter/header, clear title/hook, four aligned categories in order, readable scope/spice, and visible text actions. Long copy wraps; controls remain accessible in all five themes. | In progress: fixture result compared at 390/1440 px; long copy, all themes, and real devices remain |
 | M3-07 | Three-card paging works with desktop keys/buttons and mobile swipe/buttons; counter and active actions agree. | Not started |
 
 ## M4 — Accept, refine, and saved ideas
