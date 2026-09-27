@@ -8,7 +8,7 @@ Updated 2026-09-26. This is the executable checklist derived from the [living fe
 
 | ID | Observable result / check | Status |
 | --- | --- | --- |
-| M0-01 | Owner reviews the 50-question bank, five coverage slots, choices, and sidebar labels; approved wording is recorded in `QUESTION_BANK.md`. | Blocked: owner review |
+| M0-01 | Owner reviews the 50-question bank, five coverage slots, choices, and sidebar labels; approved wording is recorded in `QUESTION_BANK.md`. | Done: owner approved the bank on 2026-09-26 |
 | M0-02 | Git repo has `main`, a safe `.gitignore`, and a README linking these plans; no secrets are tracked. | Done |
 | M0-03 | Public `devonwallerson/bodge` remote exists and local `main` tracks `origin/main`. | Done |
 | M0-04 | Model provider is chosen after a structured-output smoke test; key stays outside Git and server build output. | Blocked: provider account/key |
@@ -18,12 +18,12 @@ Updated 2026-09-26. This is the executable checklist derived from the [living fe
 
 | ID | Observable result / check | Status |
 | --- | --- | --- |
-| M1-01 | Next.js + TypeScript app runs locally; one preview can be opened on phone and desktop. | Not started |
-| M1-02 | Title bar, traffic dots, Bodge SVG, `~/idea-lab`, status, theme dots, desktop frame, and mobile frame match references. | Not started |
-| M1-03 | Typed transcript renders seeded user, Bodge, question, progress, idea, and system entries distinctly from one reducer. | Not started |
-| M1-04 | `/help`, `/theme`, unknown command, and command completion work by keyboard and touch without model requests. | Not started |
-| M1-05 | Transcript follows new messages only when at bottom; scrolling up reveals a jump-to-new control. | Not started |
-| M1-06 | With a physical iPhone Safari and Android Chrome keyboard open, composer stays visible, title bar remains stable, and page does not jump. | Not started |
+| M1-01 | Next.js + TypeScript app runs locally; one preview can be opened on phone and desktop. | In progress: local build and 390/1440 px browser previews pass; physical phone remains unverified |
+| M1-02 | Title bar, traffic dots, Bodge SVG, `~/idea-lab`, status, theme dots, desktop frame, and mobile frame match references. | In progress: shell visually compared at 390/1440 px; physical device and theme pass remain |
+| M1-03 | Typed transcript renders seeded user, Bodge, question, progress, idea, and system entries distinctly from one reducer. | Done: fixture entries render through the reducer and typed renderer |
+| M1-04 | `/help`, `/theme`, unknown command, and command completion work by keyboard and touch without model requests. | In progress: browser keyboard flow checked; physical touch remains |
+| M1-05 | Transcript follows new messages only when at bottom; scrolling up reveals a jump-to-new control. | Done: browser check confirmed the unread control while scrolled up |
+| M1-06 | With a physical iPhone Safari and Android Chrome keyboard open, composer stays visible, title bar remains stable, and page does not jump. | Blocked: physical iPhone Safari and Android Chrome testing needed; no OS/browser versions recorded yet |
 
 M1-06 is the first technical spike. Record the tested OS/browser versions and any viewport workaround before moving on.
 
@@ -31,8 +31,8 @@ M1-06 is the first technical spike. Record the tested OS/browser versions and an
 
 | ID | Observable result / check | Status |
 | --- | --- | --- |
-| M2-01 | Bank contains 50 unique question IDs, ten per slot; new questions require no new screen component. | Blocked: M0-01 |
-| M2-02 | `/generateIdea` selects one from each slot, asks exactly five turns, and normalizes answers into the same schema; refresh does not reshuffle an active run. | Blocked: M0-01 |
+| M2-01 | Bank contains 50 unique question IDs, ten per slot; new questions require no new screen component. | Not started |
+| M2-02 | `/generateIdea` selects one from each slot, asks exactly five turns, and normalizes answers into the same schema; refresh does not reshuffle an active run. | Not started |
 | M2-07 | New runs avoid variants used in the last two sessions when alternatives exist; several runs feel different in manual review. | Not started |
 | M2-03 | Desktop number keys, arrow selection, Enter, and mobile 44 px tap rows work; free text never triggers idea shortcuts. | Not started |
 | M2-04 | Progress and “what Bodge knows” update from the same answer state on desktop and mobile. | Not started |

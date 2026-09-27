@@ -1,6 +1,6 @@
 # Bodge — draft 50-question bank
 
-Status: proposed content for owner review, 2026-09-26. This is an implementation-ready **shape** and a first copy pass. It is not yet approved wording. Bodge asks **five questions per run**, selected from the 50 below, not all 50.
+Status: approved by the owner on 2026-09-26. The wording, choices, and five coverage slots are the v1 interview baseline. Bodge asks **five questions per run**, selected from the 50 below, not all 50.
 
 ## Selection contract
 

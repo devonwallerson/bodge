@@ -4,6 +4,7 @@ node_modules/
 out/
 dist/
 coverage/
+*.tsbuildinfo
 
 # Local credentials and configuration
 .env

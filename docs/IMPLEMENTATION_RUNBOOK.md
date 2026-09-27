@@ -4,10 +4,10 @@ Use this file to resume work in a new session. Start with [IMPLEMENTATION_HANDOF
 
 ## Current state
 
-- Planning documents and visual references are saved in this repository.
+- Planning documents and visual references are saved in this repository. An M1 Next.js shell preview has been added locally with fixture transcript, three sample cards, themes, commands, and a mobile knowledge sheet. Run `npm install`, `npm run dev`, `npm run typecheck`, and `npm run build` from the root.
 - Git is initialized on `main`; the public remote is `https://github.com/devonwallerson/bodge.git`, and `main` tracks `origin/main`. No application code or deployment exists yet.
 - Owner confirmed local saved ideas, “useful with a funny twist,” and five questions drawn from a bank of about 50. A draft bank with 50 questions is in `QUESTION_BANK.md`.
-- Start the shell with fake data while the bank wording is reviewed. Do not mark M2 complete until the owner approves the bank.
+- The shell uses fake data while the bank wording is reviewed. Do not mark M2 complete until the owner approves the bank. The local M1 changes have not been pushed; honor the owner's manual verification request.
 
 ## Build sequence
 

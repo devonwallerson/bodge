@@ -2,9 +2,9 @@
 
 Use this as the first file in a new coding session. Repository: [devonwallerson/bodge](https://github.com/devonwallerson/bodge). Current local checkout: `/Users/gtrgodzilla05/hackathon-startup-idea-generator`. Read the [living specification](FEASIBILITY.md), [50-question bank](QUESTION_BANK.md), [acceptance checklist](ACCEPTANCE_CRITERIA.md), and [runbook](IMPLEMENTATION_RUNBOOK.md). Inspect both image files directly: [desktop](reference/design/bodge-desktop.png) and [mobile](reference/design/bodge-mobile.png). They are committed assets, not transient chat attachments.
 
-## Current state — do not assume app code exists
+## Current state — M1 shell preview started
 
-The GitHub remote is public and `main` tracks `origin/main`. The repo contains planning docs, the original Claude source texts, the two renderings, README, and `.gitignore`. It does **not** yet contain `package.json`, a Next.js app, an AI endpoint, a provider API key, Vercel connection, or end-user login system. No application has been deployed. The references appear in the repository README as inline images and at `docs/reference/design/`.
+The GitHub remote is public and `main` tracks `origin/main`. The repo now contains a Next.js App Router + TypeScript + Tailwind shell preview with fixture transcript and three fixture ideas. It has no AI endpoint, provider API key, Vercel connection, or end-user login system. No application has been deployed. The references remain in the repository README and at `docs/reference/design/`. The shell changes are local and have not been pushed; the owner asked to verify them manually first.
 
 The product owner decided: match the renderings closely; generate three ideas; make them useful with a funny twist; save accepted ideas locally across reloads; ask five questions selected from a roughly 50-question bank. `QUESTION_BANK.md` now drafts exactly 50 (ten per coverage slot), but its wording and options remain open for owner review. Keep the interview selection mechanism flexible enough to revise copy without rewriting UI components.
 
