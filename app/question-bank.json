@@ -1,0 +1,522 @@
+[
+  {
+    "id": "G01",
+    "slot": "goal",
+    "prompt": "Which tiny everyday frustration should this project remove?",
+    "detailPrompt": "Who hits this snag, and when?",
+    "suggestions": [
+      "solve",
+      "community",
+      "laugh",
+      "experiment",
+      "surprise"
+    ]
+  },
+  {
+    "id": "G02",
+    "slot": "goal",
+    "prompt": "What would you love to learn by building the first version?",
+    "detailPrompt": "Name a skill or concept you want to practice.",
+    "suggestions": [
+      "learn",
+      "portfolio",
+      "impress",
+      "experiment",
+      "surprise"
+    ]
+  },
+  {
+    "id": "G03",
+    "slot": "goal",
+    "prompt": "Who should leave the demo smiling or relieved?",
+    "detailPrompt": "Describe that person or group.",
+    "suggestions": [
+      "laugh",
+      "community",
+      "impress",
+      "solve",
+      "surprise"
+    ]
+  },
+  {
+    "id": "G04",
+    "slot": "goal",
+    "prompt": "What would make someone ask how you built it?",
+    "detailPrompt": "Which part should feel impressive?",
+    "suggestions": [
+      "impress",
+      "portfolio",
+      "experiment",
+      "learn",
+      "surprise"
+    ]
+  },
+  {
+    "id": "G05",
+    "slot": "goal",
+    "prompt": "What proof of your ability is missing from your portfolio?",
+    "detailPrompt": "Name the work you want this to show.",
+    "suggestions": [
+      "portfolio",
+      "impress",
+      "learn",
+      "money",
+      "surprise"
+    ]
+  },
+  {
+    "id": "G06",
+    "slot": "goal",
+    "prompt": "Which group deserves a small, practical win?",
+    "detailPrompt": "What is that group trying to do?",
+    "suggestions": [
+      "community",
+      "solve",
+      "laugh",
+      "money",
+      "surprise"
+    ]
+  },
+  {
+    "id": "G07",
+    "slot": "goal",
+    "prompt": "What business hunch could a tiny prototype test?",
+    "detailPrompt": "What would count as evidence?",
+    "suggestions": [
+      "money",
+      "experiment",
+      "learn",
+      "impress",
+      "surprise"
+    ]
+  },
+  {
+    "id": "G08",
+    "slot": "goal",
+    "prompt": "What strange what-if idea have you wanted to try?",
+    "detailPrompt": "Describe the hypothesis in one line.",
+    "suggestions": [
+      "experiment",
+      "laugh",
+      "learn",
+      "impress",
+      "surprise"
+    ]
+  },
+  {
+    "id": "G09",
+    "slot": "goal",
+    "prompt": "Whose day could you make ten minutes easier?",
+    "detailPrompt": "What task would get easier?",
+    "suggestions": [
+      "solve",
+      "community",
+      "money",
+      "laugh",
+      "surprise"
+    ]
+  },
+  {
+    "id": "G10",
+    "slot": "goal",
+    "prompt": "What should people remember after the demo?",
+    "detailPrompt": "Name the feeling, result, or moment.",
+    "suggestions": [
+      "impress",
+      "laugh",
+      "portfolio",
+      "community",
+      "surprise"
+    ]
+  },
+  {
+    "id": "W01",
+    "slot": "worlds",
+    "prompt": "Which two interests do you wish talked to each other?",
+    "detailPrompt": "What connection do you see between them?",
+    "suggestions": [
+      "games",
+      "climate",
+      "health",
+      "education",
+      "art",
+      "productivity"
+    ]
+  },
+  {
+    "id": "W02",
+    "slot": "worlds",
+    "prompt": "Where do you notice friction away from your screen?",
+    "detailPrompt": "Describe the place or situation.",
+    "suggestions": [
+      "local",
+      "food",
+      "music",
+      "travel",
+      "games",
+      "civic"
+    ]
+  },
+  {
+    "id": "W03",
+    "slot": "worlds",
+    "prompt": "Which routine could use a playful layer?",
+    "detailPrompt": "What is dull about that routine now?",
+    "suggestions": [
+      "climate",
+      "games",
+      "finance",
+      "art",
+      "health",
+      "sports"
+    ]
+  },
+  {
+    "id": "W04",
+    "slot": "worlds",
+    "prompt": "Which niche community knows a problem outsiders miss?",
+    "detailPrompt": "What do members complain about?",
+    "suggestions": [
+      "education",
+      "accessibility",
+      "music",
+      "productivity",
+      "civic",
+      "entertainment"
+    ]
+  },
+  {
+    "id": "W05",
+    "slot": "worlds",
+    "prompt": "Which rabbit holes do you explore without being asked?",
+    "detailPrompt": "Name a topic you keep returning to.",
+    "suggestions": [
+      "science",
+      "games",
+      "art",
+      "food",
+      "travel",
+      "climate"
+    ]
+  },
+  {
+    "id": "W06",
+    "slot": "worlds",
+    "prompt": "Which public service could use a friendlier interface?",
+    "detailPrompt": "Where does it frustrate people?",
+    "suggestions": [
+      "health",
+      "local",
+      "education",
+      "finance",
+      "productivity",
+      "accessibility"
+    ]
+  },
+  {
+    "id": "W07",
+    "slot": "worlds",
+    "prompt": "Which serious issue might benefit from play?",
+    "detailPrompt": "What would make it approachable?",
+    "suggestions": [
+      "climate",
+      "health",
+      "finance",
+      "games",
+      "music",
+      "entertainment"
+    ]
+  },
+  {
+    "id": "W08",
+    "slot": "worlds",
+    "prompt": "Which hobby has surprisingly messy coordination?",
+    "detailPrompt": "What do participants juggle?",
+    "suggestions": [
+      "sports",
+      "food",
+      "local",
+      "civic",
+      "travel",
+      "productivity"
+    ]
+  },
+  {
+    "id": "W09",
+    "slot": "worlds",
+    "prompt": "Which two kinds of information should meet in one place?",
+    "detailPrompt": "What would you learn by connecting them?",
+    "suggestions": [
+      "science",
+      "art",
+      "finance",
+      "games",
+      "education",
+      "music"
+    ]
+  },
+  {
+    "id": "W10",
+    "slot": "worlds",
+    "prompt": "Which overlooked place or topic could inspire a project?",
+    "detailPrompt": "What detail would most people miss?",
+    "suggestions": [
+      "accessibility",
+      "climate",
+      "local",
+      "entertainment",
+      "health",
+      "science"
+    ]
+  },
+  {
+    "id": "S01",
+    "slot": "scope",
+    "prompt": "What must be working by the end of your build window?",
+    "detailPrompt": "Name the one feature the demo needs."
+  },
+  {
+    "id": "S02",
+    "slot": "scope",
+    "prompt": "Can the first version be tested alone, or does it need a crew?",
+    "detailPrompt": "Which task depends on another person?"
+  },
+  {
+    "id": "S03",
+    "slot": "scope",
+    "prompt": "What would you cut first to hit the deadline?",
+    "detailPrompt": "Name a feature to leave out."
+  },
+  {
+    "id": "S04",
+    "slot": "scope",
+    "prompt": "Does the demo need real data, or can a convincing mock prove it?",
+    "detailPrompt": "What data can you access or fake?"
+  },
+  {
+    "id": "S05",
+    "slot": "scope",
+    "prompt": "What single interaction should the first demo prove?",
+    "detailPrompt": "Describe that interaction."
+  },
+  {
+    "id": "S06",
+    "slot": "scope",
+    "prompt": "What must happen live instead of in a slide?",
+    "detailPrompt": "Name the live moment."
+  },
+  {
+    "id": "S07",
+    "slot": "scope",
+    "prompt": "What's your biggest build constraint besides time?",
+    "detailPrompt": "Think budget, access, hardware, or approvals."
+  },
+  {
+    "id": "S08",
+    "slot": "scope",
+    "prompt": "What could you show before the first long break?",
+    "detailPrompt": "Describe the smallest visible result."
+  },
+  {
+    "id": "S09",
+    "slot": "scope",
+    "prompt": "How much setup can your crew tolerate?",
+    "detailPrompt": "Name a setup step you'd rather skip."
+  },
+  {
+    "id": "S10",
+    "slot": "scope",
+    "prompt": "Where should the MVP stop, even if you have more ideas?",
+    "detailPrompt": "Draw a clear line around version one."
+  },
+  {
+    "id": "T01",
+    "slot": "toolkit",
+    "prompt": "Which tool gets you to a clickable demo fastest?",
+    "detailPrompt": "What can you already ship with it?",
+    "suggestions": [
+      "TypeScript",
+      "Python",
+      "React",
+      "design",
+      "hardware"
+    ]
+  },
+  {
+    "id": "T02",
+    "slot": "toolkit",
+    "prompt": "Which part can you build without a tutorial?",
+    "detailPrompt": "Name the work you can own confidently.",
+    "suggestions": [
+      "JavaScript",
+      "Python",
+      "SQL",
+      "mobile",
+      "no-code"
+    ]
+  },
+  {
+    "id": "T03",
+    "slot": "toolkit",
+    "prompt": "Which unfamiliar tool would be fun to learn here?",
+    "detailPrompt": "What would you like to try with it?",
+    "suggestions": [
+      "AI API",
+      "mapping",
+      "data viz",
+      "games",
+      "hardware"
+    ]
+  },
+  {
+    "id": "T04",
+    "slot": "toolkit",
+    "prompt": "Would you rather build the interface, logic, data, or hardware?",
+    "detailPrompt": "Which layer should carry the demo?",
+    "suggestions": [
+      "frontend",
+      "backend",
+      "data",
+      "design",
+      "hardware"
+    ]
+  },
+  {
+    "id": "T05",
+    "slot": "toolkit",
+    "prompt": "Which existing asset could you reuse instead of starting from zero?",
+    "detailPrompt": "Name a component, dataset, sketch, or template.",
+    "suggestions": [
+      "React",
+      "Node",
+      "Python",
+      "Figma",
+      "spreadsheets"
+    ]
+  },
+  {
+    "id": "T06",
+    "slot": "toolkit",
+    "prompt": "What must work offline or without an API key?",
+    "detailPrompt": "Describe the no-network version.",
+    "suggestions": [
+      "web",
+      "mobile",
+      "AI API",
+      "local data",
+      "sensors"
+    ]
+  },
+  {
+    "id": "T07",
+    "slot": "toolkit",
+    "prompt": "Which teammate has an unusual strength to build around?",
+    "detailPrompt": "What can that person do well?",
+    "suggestions": [
+      "UI",
+      "backend",
+      "data",
+      "storytelling",
+      "integrations"
+    ]
+  },
+  {
+    "id": "T08",
+    "slot": "toolkit",
+    "prompt": "What tool or approach should we steer clear of?",
+    "detailPrompt": "Why would it slow you down?",
+    "suggestions": [
+      "TypeScript",
+      "Python",
+      "AI API",
+      "maps",
+      "no-code"
+    ]
+  },
+  {
+    "id": "T09",
+    "slot": "toolkit",
+    "prompt": "What data, device, or integration can you access already?",
+    "detailPrompt": "Name the resource you can use today.",
+    "suggestions": [
+      "frontend",
+      "backend",
+      "design",
+      "ML",
+      "domain knowledge"
+    ]
+  },
+  {
+    "id": "T10",
+    "slot": "toolkit",
+    "prompt": "Which noncoding skill could carry this project?",
+    "detailPrompt": "Think research, writing, facilitation, or design.",
+    "suggestions": [
+      "research",
+      "writing",
+      "design",
+      "data",
+      "hardware"
+    ]
+  },
+  {
+    "id": "P01",
+    "slot": "spice",
+    "prompt": "Should the joke live in the mascot, interaction, or reveal?",
+    "detailPrompt": "Where should the funny moment happen?"
+  },
+  {
+    "id": "P02",
+    "slot": "spice",
+    "prompt": "Should the product sound straight-faced or self-aware?",
+    "detailPrompt": "Describe its voice in a few words."
+  },
+  {
+    "id": "P03",
+    "slot": "spice",
+    "prompt": "What harmless surprise would make the demo memorable?",
+    "detailPrompt": "Name the unexpected moment."
+  },
+  {
+    "id": "P04",
+    "slot": "spice",
+    "prompt": "How absurd can the premise get before it stops helping?",
+    "detailPrompt": "Name a boundary the joke should respect."
+  },
+  {
+    "id": "P05",
+    "slot": "spice",
+    "prompt": "Would you rather land one punchline or a recurring bit?",
+    "detailPrompt": "What kind of joke fits?"
+  },
+  {
+    "id": "P06",
+    "slot": "spice",
+    "prompt": "Which ordinary task deserves dramatic treatment?",
+    "detailPrompt": "Name the task and the exaggeration."
+  },
+  {
+    "id": "P07",
+    "slot": "spice",
+    "prompt": "When should the weirdness appear: first click or final payoff?",
+    "detailPrompt": "Describe the moment you prefer."
+  },
+  {
+    "id": "P08",
+    "slot": "spice",
+    "prompt": "What should never become the punchline?",
+    "detailPrompt": "Name anything off-limits for the joke."
+  },
+  {
+    "id": "P09",
+    "slot": "spice",
+    "prompt": "Should the twist make the pitch funnier or the product itself?",
+    "detailPrompt": "How would people notice it?"
+  },
+  {
+    "id": "P10",
+    "slot": "spice",
+    "prompt": "What bizarre rule could still fit a feasible MVP?",
+    "detailPrompt": "State a strange but buildable rule."
+  }
+]
